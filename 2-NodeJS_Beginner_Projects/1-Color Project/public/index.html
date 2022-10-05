@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Color Changer</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <script
+      src="https://code.jquery.com/jquery-3.6.1.min.js"
+      integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
+      crossorigin="anonymous"
+    ></script>
+    <script src="./script.js"></script>
+    <header id="header">
+      <h3 id="title">Color Changer</h3>
+      <div id="seperator"></div>
+      <ul id="list">
+        <li class="colorType" id="name">Name</li>
+        <li class="colorType" id="rgb">RGB</li>
+        <li class="colorType" id="hex">Hex</li>
+      </ul>
+    </header>
+    <main id="main">
+      <h1 id="backgroundColor">
+        Background Color : <span id="span">Coral</span>
+      </h1>
+      <button id="btn">CHANGE!</button>
+    </main>
+  </body>
+</html>

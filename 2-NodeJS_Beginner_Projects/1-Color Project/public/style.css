@@ -1,0 +1,111 @@
+:root {
+  --selectColor: rgb(45, 135, 155);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  width: 100%;
+  overflow: hidden;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  height: 100vh;
+}
+
+#header {
+  height: 3rem;
+  box-shadow: 0 0 5px 2px var(--selectColor);
+  background-color: white;
+}
+
+#title {
+  color: var(--selectColor); /* Delete */
+}
+
+#seperator {
+  width: 1px;
+  height: 20px;
+}
+
+#list {
+  list-style-type: none;
+  font-weight: bold;
+}
+
+.colorType {
+  cursor: pointer;
+}
+
+#main {
+  height: 100%;
+  margin: 0 auto;
+  flex-direction: column;
+  position: absolute;
+  top: 32vh;
+}
+
+#backgroundColor {
+  padding: 2rem 0;
+  max-width: max-content;
+  margin: 0 auto;
+  color: wheat;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+#btn {
+  max-width: max-content;
+  margin-top: 2rem;
+  border: 2px double black;
+  padding: 1.2rem 3rem;
+  cursor: pointer;
+  letter-spacing: 5px;
+  font-size: 1rem;
+  font-weight: bolder;
+  transition: 0.3s;
+}
+
+#btn:hover {
+  background-color: white;
+  transform: scale(1.1);
+}
+
+/* #region Common Codes */
+
+body,
+#btn {
+  background-color: coral;
+}
+
+#title,
+#backgroundColor,
+.colorType {
+  text-align: center;
+}
+
+#title,
+#span,
+#name {
+  color: var(--selectColor);
+}
+
+#backgroundColor,
+#btn {
+  border-radius: 20px;
+}
+
+#backgroundColor,
+#seperator {
+  background-color: black;
+}
+
+#main,
+#header,
+#list {
+  display: flex;
+  place-items: center;
+}
+/* #endregion Common Codes */

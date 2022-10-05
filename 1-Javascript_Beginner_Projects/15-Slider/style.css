@@ -1,0 +1,97 @@
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: rgb(173, 199, 199);
+  overflow: hidden;
+}
+
+#mainContainer {
+  width: 100vw;
+  height: 50vw;
+  margin: 5rem auto;
+  display: grid;
+  place-items: center;
+  grid-template-rows: 45vw 5vw;
+  grid-row-gap: 2rem;
+}
+
+#sliderContainer {
+  display: grid;
+  grid-template-columns: 1fr 80vw 1fr;
+  width: 100%;
+  height: 100%;
+}
+
+.empty {
+  width: 100%;
+  height: 100%;
+  z-index: 5;
+  background-color: black;
+}
+
+#imgContainer {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+.imgDiv {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+img {
+  width: 80vw;
+  height: 100%;
+  object-fit: cover;
+}
+
+figure {
+  height: 100%;
+  width: 100%;
+}
+
+figcaption {
+  font-size: 5rem;
+  color: red;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  top: 25vh;
+}
+
+#nextImg {
+  left: -80vw;
+  opacity: 0;
+  z-index: 1;
+}
+
+#prevImg {
+  right: -80vw;
+  opacity: 0;
+  z-index: 1;
+}
+
+#btnContainer {
+  font-size: 2rem;
+  display: flex;
+  column-gap: 2rem;
+  color: rgb(160, 87, 35);
+  z-index: 2;
+}
+
+.btn {
+  cursor: pointer;
+}
+
+#prev {
+  display: none;
+}

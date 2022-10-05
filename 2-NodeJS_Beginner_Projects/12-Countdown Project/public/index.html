@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Countdown</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <script
+      src="https://code.jquery.com/jquery-3.6.1.min.js"
+      integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
+      crossorigin="anonymous"
+    ></script>
+    <script src="./script.js"></script>
+    <main id="mainContainer" class="grid">
+      <div id="imgContainer">
+        <img lazy src="https://images.alphacoders.com/540/540072.jpg" alt="" />
+      </div>
+      <div id="infoContainer" class="grid">
+        <div id="headerContainer">
+          <h2 id="header">Countdown to Mars!</h2>
+          <p id="finalDay">Our next rockets will arrive to Mars on...</p>
+        </div>
+        <p id="description">
+          First time in history our rockets with astronots who will live there
+          rest of their life and colonise the planet will arrive on Mars in a
+          determined timeline. Down you can follow our countdown for our
+          historical event.
+        </p>
+        <div id="countDown" class="grid">
+          <div class="numbersContainer grid">
+            <span class="numbers" id="days">0</span>
+            <span class="date">Days</span>
+          </div>
+          <div class="numbersContainer grid">
+            <span class="numbers" id="hours">0</span>
+            <span class="date">Hours</span>
+          </div>
+          <div class="numbersContainer grid">
+            <span class="numbers" id="minutes">0</span>
+            <span class="date">Minutes</span>
+          </div>
+          <div class="numbersContainer grid">
+            <span class="numbers" id="seconds">0</span>
+            <span class="date">Seconds</span>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>

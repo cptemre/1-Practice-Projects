@@ -1,0 +1,161 @@
+:root {
+  --red: rgb(210, 43, 43);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background: linear-gradient(rgb(207, 149, 149), rgb(142, 34, 34));
+}
+
+#mainContainer,
+#titleContainer,
+#bodyContainer {
+  display: grid;
+  place-items: center;
+  bottom: 2rem;
+}
+
+#mainContainer {
+  width: 85%;
+  margin: 7rem auto;
+}
+
+#headerContainer {
+  position: relative;
+  font-size: 2.5rem;
+  bottom: 3rem;
+}
+
+#underline {
+  width: 2rem;
+  height: 2px;
+  background-color: var(--red);
+  margin: 0.5rem auto;
+}
+
+#bodyContainer {
+  row-gap: 1rem;
+}
+
+#img {
+  object-fit: cover;
+  margin: 0 auto;
+}
+
+#imgContainer {
+  height: 10rem;
+  bottom: 3rem;
+}
+
+#imgContainer::before {
+  content: '"';
+  display: block;
+  background-color: var(--red);
+  color: white;
+  top: 2.2rem;
+  left: -0.7rem;
+  border: 5px double black;
+  border-radius: 2rem;
+  text-align: center;
+  font-size: 2.825rem;
+  height: 2rem;
+  width: 2rem;
+}
+
+#imgContainer::after {
+  content: "";
+  background-color: var(--red);
+  top: -7rem;
+  right: -0.4rem;
+  border: 2px solid black;
+  z-index: -1;
+}
+
+#imgContainer,
+#imgContainer::before,
+#imgContainer::after,
+#titleContainer,
+#mainContainer
+{
+  position: relative;
+}
+
+#img,
+#imgContainer::after {
+  width: 7rem;
+  height: 7rem;
+  display: block;
+  border-radius: 50%;
+}
+
+#titleContainer {
+  bottom: 2rem;
+}
+
+#author {
+  font-size: 2rem;
+  letter-spacing: 2px;
+}
+
+#book {
+  color: rgb(12, 77, 121);
+}
+
+#quote {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  background-color: rgb(89, 81, 81);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  border: 2px solid black;
+  font-weight: 550;
+  max-width: 35rem;
+}
+
+#arrowContainer {
+  display: flex;
+  gap: 1rem;
+    bottom: 5rem;
+}
+
+.arrow {
+  font-size: 1.7rem;
+  padding: 0 0.6rem;
+  background-color: transparent;
+  color: rgb(201, 174, 174);
+  border-radius: 5px;
+}
+
+#random {
+  font-size: 1rem;
+  padding: 0.5rem;
+  width: 7rem;
+  border-radius: 2rem;
+  color: white;
+  background-color: transparent;
+    bottom: 2rem;
+
+}
+
+#arrowContainer, #random {
+    position: fixed;
+}
+
+.arrow,
+#random {
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.arrow:hover,
+#random:hover {
+  background-color: var(--red);
+}

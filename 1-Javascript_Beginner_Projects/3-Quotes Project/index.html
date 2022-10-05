@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quotes</title>
+    <link rel="stylesheet" href="./style.css">
+  </head>
+  <body>
+    <script
+      src="https://code.jquery.com/jquery-3.6.1.min.js"
+      integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
+      crossorigin="anonymous"
+    ></script>
+    <script src="./script.js"></script>
+    <div id="mainContainer">
+      <div id="headerContainer">
+        <h1 id="header">Quotes</h1>
+        <div id="underline"></div>
+      </div>
+      <div id="bodyContainer">
+        <div id="imgContainer">
+            <img id="img"
+          src="https://static01.nyt.com/images/2020/01/17/nytnow/16xp-tolkien-image2/12nytnow-tolkien-articleLarge.jpg?quality=75&auto=webp&disable=upscale"
+          alt="J.R.R. TOLKIEN"
+        />
+        </div>
+        <div id="titleContainer">
+          <h3 id="author">J.R.R. TOLKIEN</h3>
+          <h4 id="book">The Lord of the Rings</h4>
+        </div>
+        <p id="quote">
+          I don't know half of you half as well as I should like; and I like
+          less than half of you half as well as you deserve.
+        </p>
+        <div id="arrowContainer">
+          <button class="arrow" id="left"><</button>
+          <button class="arrow" id="right">></button>
+        </div>
+        <button id="random">Random</button>
+      </div>
+    </div>
+  </body>
+</html>

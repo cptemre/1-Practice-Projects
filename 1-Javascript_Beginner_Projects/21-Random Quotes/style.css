@@ -1,0 +1,92 @@
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  background-color: black;
+  color: white;
+  letter-spacing: 3px;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  overflow: hidden;
+}
+
+.grid {
+  display: grid;
+  place-items: center;
+  height: 100%;
+  width: 90vh;
+}
+
+#mainDiv {
+  grid-template-rows: 5vh 40vh;
+  grid-template-columns: 100vw;
+  grid-row-gap: 5rem;
+  margin-top: 25vh;
+}
+
+#btnDiv {
+  justify-items: flex-end;
+}
+
+#btn {
+  letter-spacing: 2px;
+  outline: none;
+  padding: 8px;
+  border-radius: 15px;
+  background-color: beige;
+  transition: 0.3s;
+  background-color: tomato;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#btn:hover {
+  background-color: white;
+  color: tomato;
+}
+
+#randomDiv {
+  background-color: rgb(184, 153, 153);
+  color: black;
+  border: 5px solid tomato;
+  border-radius: 20px;
+  padding: 0 50px;
+}
+
+#randomQuoteDiv {
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 2rem;
+  position: relative;
+}
+
+#random {
+  font-style: italic;
+}
+
+#random::first-letter {
+  font-size: 5rem;
+}
+
+span {
+  position: absolute;
+  font-size: 3rem;
+  color: tomato;
+}
+
+span:first-of-type {
+  top: 0;
+  left: -2rem;
+}
+
+span:last-of-type {
+  bottom: -2rem;
+  right: -2rem;
+}

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Scroll Project</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <script
+      src="https://code.jquery.com/jquery-3.6.1.min.js"
+      integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
+      crossorigin="anonymous"
+    ></script>
+    <script src="./script.js"></script>
+    <nav id="nav">
+      <h1 id="brand">EXOTIC DISCOVERY</h1>
+      <ul id="links">
+        <li class="lists"><a href="#homeContainer" class="links">Home</a></li>
+        <li class="lists"><a href="#aboutSection" class="links">About</a></li>
+        <li class="lists"><a href="#officesSection" class="links">Offices</a></li>
+        <li class="lists"><a href="#toursSection" class="links">Tours</a></li>
+      </ul>
+      <div id="hamburger">
+        <div class="hamburgers"></div>
+        <div class="hamburgers"></div>
+        <div class="hamburgers"></div>
+      </div>
+    </nav>
+    <main id="main">
+      <section class="section" id="homeContainer">
+        <article class="article" id="homeArticle">
+          <h1 class="header">WELCOME</h1>
+          <p class="description">
+            Welcome to "Exotic Discovery" official website. Here you can find
+            more about us and our services. Feel free to contact for more
+            information!
+          </p>
+          <div id="exploreContainer"><a href="#toursSection" id="explore">Explore</a></div>
+        </article>
+      </section>
+      <section class="section" id="aboutSection">
+        <article class="article" id="aboutArticle">
+          <h1 class="header city" id="aboutHeader">ABOUT US</h1>
+          <div id="descriptionContainer">
+            <p class="description aboutDescription" id="firstDescription">
+              We are located in Poland since 2005 to serve our clients the best
+              holiday experiences they can get. We began to work globally since
+              2009 and still growing with our day 1 ambition.
+            </p>
+            <p class="description aboutDescription" id="secondDescription">
+              Our tours offer the very popular places on Earth including the
+              area of <span class="area">"Europe"</span>,
+              <span class="area">"Far East"</span> and
+              <span class="area">"South America"</span>.
+            </p>
+            <p class="description aboutDescription" id="thirdDescription">
+              You can contact with us 7/24 from the number +123456789 for your
+              questions and advices for the best experience you can get from a
+              holiday. Remember, you deserve the best!
+            </p>
+          </div>
+        </article>
+      </section>
+      <section class="section" id="officesSection">
+        <article class="article" id="officesArticle">
+          <h1 class="header city" id="officeHeader">Offices</h1>
+          <div id="officesContainer">
+            <div class="officesContainers" id="firstOfficeContainer">
+              <p class="city">WAR<br class="break" />SAW</p>
+            </div>
+            <div class="officesFilter"></div>
+            <div class="officesContainers" id="secondOfficeContainer">
+              <p class="city">
+                IS<br class="break" />TAN<br class="break" />BUL
+              </p>
+            </div>
+            <div class="officesFilter"></div>
+            <div class="officesContainers" id="thirdOfficeContainer">
+              <p class="city">BANG<br class="break" />KOK</p>
+            </div>
+            <div class="officesFilter"></div>
+          </div>
+        </article>
+      </section>
+      <section class="section" id="toursSection">
+        <article class="article" id="toursArticle">
+          <h1 class="header city" id="tourHeader">Tours</h1>
+          <div id="tourContainer">
+            <div class="tourContainers" id="firstTourContainer">
+              <p class="city tour">CAPADOCIA</p>
+            </div>
+            <div class="tourContainers" id="secondTourContainer">
+              <p class="city tour">PHUKET</p>
+            </div>
+            <div class="tourContainers" id="thirdTourContainer">
+              <p class="city tour">RIO DE JANEIRO</p>
+            </div>
+            <div class="tourContainers" id="forthTourContainer">
+              <p class="city tour">MOSCOW</p>
+            </div>
+            <div class="tourContainers" id="fifthTourContainer">
+              <p class="city tour">NEW ZEALAND</p>
+            </div>
+          </div>
+          <div class="tourFilter"></div>
+        </article>
+      </section>
+      <div id="filter"></div>
+    </main>
+  </body>
+</html>

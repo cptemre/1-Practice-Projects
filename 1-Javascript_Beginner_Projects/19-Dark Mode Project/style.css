@@ -1,0 +1,96 @@
+:root {
+  --border: 2px solid white;
+}
+
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: black;
+  color: white;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  letter-spacing: 3px;
+  width: 100vw;
+  overflow-x: hidden;
+  transition: 0.5s;
+}
+
+#mainContainer {
+  display: grid;
+  grid-row-gap: 7rem;
+  place-items: center;
+  margin: 3rem 0;
+}
+
+#headerDiv {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 10rem;
+  row-gap: 2rem;
+  place-items: center;
+  margin: 0 2rem;
+  width: 100%;
+}
+
+#header,
+#btn {
+  margin: 0 auto;
+}
+
+#btn {
+  background-color: transparent;
+  color: white;
+  border: var(--border);
+  border-radius: 5px;
+  padding: 0.5rem;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+#articleContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.articleDiv {
+  display: grid;
+  grid-row-gap: 1.5rem;
+  border-bottom: var(--border);
+  border-radius: 5px;
+  padding: 1rem;
+  max-width: 80vw;
+  margin-bottom: 5rem;
+  transition: 0.5s;
+  cursor: pointer;
+}
+
+.articleDiv:hover {
+  border-top: var(--border);
+  border-color: white;
+  border-width: 5px;
+  transform: scale(1.1);
+}
+
+.articleHeader {
+  color: violet;
+}
+
+.dateDiv {
+  font-style: italic;
+  font-size: 0.7rem;
+}
+
+p {
+  text-align: justify;
+  text-indent: 2rem;
+  line-height: 1.7rem;
+}
+
+p::first-letter {
+  font-size: 2rem;
+}
