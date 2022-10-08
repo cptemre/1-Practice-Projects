@@ -100,7 +100,7 @@ $(function () {
       ps: true,
     },
     {
-      name: "Read Dead Redemption II",
+      name: "Red Dead Redemption II",
       price: "69,99",
       src: "https://assets.vg247.com/current/2018/10/red_dead_redemption_2_screenshot-r_55.jpg",
       description:
