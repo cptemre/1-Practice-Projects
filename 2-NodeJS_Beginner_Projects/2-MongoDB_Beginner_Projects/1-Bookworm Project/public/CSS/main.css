@@ -1,0 +1,147 @@
+:root {
+  --textColor: white;
+  --headerBG: rgb(98, 32, 32);
+  --rowGap: 0.5rem;
+  --height: 7vh;
+  --oneRem: 1rem;
+  --twoPx: 2px;
+  --marginAuto: 0 auto;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  width: 100vw;
+  background-color: black;
+  color: var(--textColor);
+  overflow-x: hidden;
+  letter-spacing: var(--twoPx);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  transition: 0.3s;
+}
+/* TYPE COMMON STYLES */
+
+a {
+  text-decoration: none;
+  color: var(--textColor);
+}
+
+ul {
+  display: flex;
+  place-items: center;
+  flex-wrap: wrap;
+  column-gap: var(--oneRem);
+  width: 90vw;
+}
+
+li {
+  list-style-type: none;
+}
+/* TYPE COMMON STYLES */
+
+/* MULTIPLE COMMON STYLES */
+
+body,
+#main {
+  width: 100vw;
+  min-height: 100vh;
+  max-height: max-content;
+}
+
+ul,
+li {
+  margin: var(--marginAuto);
+}
+
+#header,
+li,
+#footer {
+  text-align: center;
+}
+/* MULTIPLE COMMON STYLES */
+
+#main {
+  position: relative;
+}
+
+/* HEADER START*/
+#header {
+  background-color: var(--headerBG);
+  min-height: var(--height);
+}
+#hamburgerDiv {
+  position: absolute;
+  top: var(--oneRem);
+  left: var(--oneRem);
+  display: grid;
+  grid-row-gap: 0.3rem;
+  cursor: pointer;
+}
+.hamburgerLines {
+  width: 20px;
+  height: var(--twoPx);
+  background-color: rgb(189, 69, 48);
+}
+.hamburgerLines:first-child,
+.hamburgerLines:last-child {
+  transform-origin: left;
+}
+/* HEADER END*/
+
+/* NAVBAR START*/
+#nav {
+  width: 98vw;
+  margin: var(--rowGap) auto;
+  background-color: rgb(98, 32, 32, 0.7);
+  border-radius: 4rem;
+  border-top-left-radius: 1rem;
+  border-bottom-right-radius: 1rem;
+  border: 3px solid rgb(121, 53, 53);
+  transform-origin: left top;
+  transform: scale(0);
+  height: 0;
+  z-index: 1;
+}
+
+@keyframes scale {
+  from {
+    transform: scale(0);
+    height: 0;
+  }
+  to {
+    transform: scale(1);
+    height: auto;
+  }
+}
+/* UL */
+#navlist {
+  row-gap: var(--rowGap);
+  padding: var(--rowGap);
+}
+/* LI */
+.navlists {
+  opacity: 0.5;
+  background-color: rgb(189, 69, 48);
+  padding: 7px;
+  border-radius: 10px;
+}
+/* ANCHOR */
+.navlinks {
+  letter-spacing: 5px;
+}
+/* NAVBAR END*/
+
+/* FOOTER START*/
+#footer {
+  position: absolute;
+  bottom: 0;
+  padding: var(--rowGap);
+  background-color: var(--headerBG);
+  width: 100vw;
+}
+
+/* FOOTER START*/
