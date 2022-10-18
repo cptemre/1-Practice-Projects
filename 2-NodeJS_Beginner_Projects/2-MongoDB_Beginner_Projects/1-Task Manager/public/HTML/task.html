@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Task Manager</title>
+    <link rel="stylesheet" href="../CSS/main.css" />
+    <link rel="stylesheet" href="../CSS/task.css" />
+  </head>
+  <body>
+    <script
+      src="https://code.jquery.com/jquery-3.6.1.min.js"
+      integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
+      crossorigin="anonymous"
+    ></script>
+    <script src="../JS/main.js"></script>
+    <main id="main" class="grid">
+      <article id="tasks" class="grid">
+        <section class="task transition cursor grid" id="task">
+          <form id="editForm" value="editForm">
+            <div class="labelDiv grid">
+              <label for="editID">CLOUD ID:</label>
+              <input type="text" value="" id="editID" class="editInput" />
+            </div>
+            <div class="labelDiv grid">
+              <label for="editName">NAME:</label>
+              <input
+                type="text"
+                value=""
+                placeholder="Edit your task..."
+                id="editName"
+                class="editInput transition"
+              />
+            </div>
+            <div class="labelDiv grid" id="checkDiv">
+              <label for="editCompleted">Completed:</label>
+              <input
+                type="checkbox"
+                value=""
+                placeholder="Edit your task..."
+                id="editCompleted"
+              />
+            </div>
+            <div class="labelDiv grid" id="btnsDiv">
+              <button class="editBtns">DELETE</button
+              ><button class="editBtns">UPDATE</button>
+            </div>
+          </form>
+        </section>
+      </article>
+    </main>
+  </body>
+</html>
