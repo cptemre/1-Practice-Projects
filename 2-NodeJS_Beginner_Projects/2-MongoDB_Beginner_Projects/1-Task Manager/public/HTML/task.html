@@ -14,7 +14,11 @@
       integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
       crossorigin="anonymous"
     ></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="../JS/main.js"></script>
+    <script src="../JS/taskMain.js"></script>
+    <script src="../JS/deleteTask.js"></script>
+    <script src="../JS/updateTask.js"></script>
     <main id="main" class="grid">
       <article id="tasks" class="grid">
         <section class="task transition cursor grid" id="task">
@@ -43,8 +47,11 @@
               />
             </div>
             <div class="labelDiv grid" id="btnsDiv">
-              <button class="editBtns">DELETE</button
-              ><button class="editBtns">UPDATE</button>
+              <button class="editBtns" id="deleteBtn">
+                <a class="anchor" href="/">DELETE</a></button
+              ><button class="editBtns" id="updateBtn">
+                <a class="anchor" href="/">UPDATE</a>
+              </button>
             </div>
           </form>
         </section>

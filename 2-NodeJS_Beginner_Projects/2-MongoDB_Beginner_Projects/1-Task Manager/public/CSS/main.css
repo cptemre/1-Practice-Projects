@@ -98,7 +98,6 @@ button {
   letter-spacing: 3px;
   text-transform: uppercase;
   font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
-  color: rgb(42, 88, 113);
 }
 
 .task:hover {
@@ -106,6 +105,17 @@ button {
   background-color: var(--myOrange);
   transform: scale(1.2);
   border: 2px solid white;
+}
+
+.anchor {
+  display: inline-block;
+  text-decoration: none;
+  color: rgb(42, 88, 113);
+  width: 100%;
+}
+
+.true {
+  text-decoration: line-through !important;
 }
 
 @media screen and (max-width: 650px) {
