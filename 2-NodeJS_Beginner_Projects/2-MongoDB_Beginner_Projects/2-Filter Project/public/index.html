@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Filter Project</title>
+    <link rel="stylesheet" href="./CSS/main.css" />
+  </head>
+  <body>
+    <script
+      src="https://code.jquery.com/jquery-3.6.1.js"
+      integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI="
+      crossorigin="anonymous"
+    ></script>
+    <script src="./JS/main.js"></script>
+    <main>
+      <header>
+        <div id="queryDiv">
+          <div id="searchDiv" class="grid">
+            <form method="get" id="searchSection" class="grid">
+              <input
+                type="search"
+                name=""
+                placeholder="Write your label here."
+                id="search"
+              />
+              <select name="" id="">
+                <option value="">1</option>
+                <option value="">2</option>
+                <option value="">3</option>
+                <option value="">4</option>
+                <option value="">5</option>
+              </select>
+            </form>
+            <div id="gameLibrary">Game<span id="library">Library</span></div>
+          </div>
+          <form method="get" id="labelForm" class="grid">
+            <div id="labelDiv" class="grid">
+              <div class="label">
+                <input
+                  type="search"
+                  value="1"
+                  name="1"
+                  class="labels pointer"
+                />
+                <span class="delete transition grid pointer">X</span>
+              </div>
+              <div class="label">
+                <input type="search" value="2" name="1" class="labels" />
+                <span class="delete transition grid">X</span>
+              </div>
+              <div class="label">
+                <input type="search" value="3" name="1" class="labels" />
+                <span class="delete transition grid">X</span>
+              </div>
+              <div class="label">
+                <input type="search" value="4" name="1" class="labels" />
+                <span class="delete transition grid">X</span>
+              </div>
+              <div class="label">
+                <input type="search" value="5" name="1" class="labels" />
+                <span class="delete transition grid">X</span>
+              </div>
+              <div class="label">
+                <input type="search" value="6" name="1" class="labels" />
+                <span class="delete transition grid">X</span>
+              </div>
+            </div>
+            <input
+              type="submit"
+              value="SEARCH"
+              id="submitBtn"
+              class="pointer transition"
+            />
+          </form>
+        </div>
+        <div id="arrowDiv" class="grid pointer transition">&#8659;</div>
+      </header>
+      <nav class="grid transition">
+        <div class="genres pointer transition">A</div>
+        <div class="genres pointer transition">B</div>
+        <div class="genres pointer transition">C</div>
+        <div class="genres pointer transition">D</div>
+        <div class="genres pointer transition">E</div>
+      </nav>
+      <section id="mainSection" class="grid">
+        <article id="gameArticle" class="grid">
+          <div class="games grid pointer">
+            <figure>
+              <img
+                src="https://www.pixelstalk.net/wp-content/uploads/2016/08/Batman-Arkham-Knight-Images.jpg"
+                alt=""
+                class="gameImg"
+              />
+              <figcaption class="transition grid">Batman-Arkham-Knight</figcaption>
+            </figure>
+          </div>
+          <div class="games grid">
+            <figure>
+              <img
+                src="https://www.pixelstalk.net/wp-content/uploads/2016/08/Batman-Arkham-Knight-Images.jpg"
+                alt=""
+                class="gameImg"
+              />
+              <figcaption></figcaption>
+            </figure>
+          </div>
+          <div class="games grid">
+            <figure>
+              <img
+                src="https://www.pixelstalk.net/wp-content/uploads/2016/08/Batman-Arkham-Knight-Images.jpg"
+                alt=""
+                class="gameImg"
+              />
+              <figcaption></figcaption>
+            </figure>
+          </div>
+          <div class="games grid">
+            <figure>
+              <img
+                src="https://www.pixelstalk.net/wp-content/uploads/2016/08/Batman-Arkham-Knight-Images.jpg"
+                alt=""
+                class="gameImg"
+              />
+              <figcaption></figcaption>
+            </figure>
+          </div>
+        </article>
+      </section>
+      <footer>
+        <div class="pointer grid">PREVIOUS</div>
+        <div class="pointer grid">NEXT</div>
+      </footer>
+    </main>
+  </body>
+</html>
