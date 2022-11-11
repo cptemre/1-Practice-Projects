@@ -38,6 +38,16 @@ $(function () {
       $("#recommendDiv").empty();
     }
   };
+  let labelList = [
+    { names: [] },
+    { developers: [] },
+    { publishers: [] },
+    { engines: [] },
+    { platforms: [] },
+    { years: [] },
+    { genres: [] },
+    { modes: [] },
+  ];
 
   $("#search").on({
     keyup: () => {
@@ -67,11 +77,28 @@ $(function () {
             </figure></div>`;
           const names = $(e.currentTarget).html();
           const label = `<div class="label grid pointer">
-                  <input type="search" value="${names}" name="developers" class="labels" />
+                  <input type="search" value="${names}" name="${searchName}" class="labels" />
                   <span class="delete transition grid pointer">X</span>
                 </div>`;
-          $("#labelDiv").append(label);
-          $(".labels").attr("name", searchName);
+          for (let i = 0; i < labelList.length; i++) {
+            if (Object.keys(labelList[i]) == $("#label").html().toLowerCase()) {
+              labelList[i][Object.keys(labelList[i])].push(names);
+              labelList[i][Object.keys(labelList[i])] = [
+                ...new Set(labelList[i][Object.keys(labelList[i])]),
+              ];
+            }
+          }
+          $("#labelDiv").empty();
+          for (let i = 0; i < labelList.length; i++) {
+            for (const key in labelList[i]) {
+              if (labelList[i][key].length) {
+                $("#labelDiv").append(label);
+              }
+            }
+          }
+
+          console.log(labelList);
+
           $("#gameArticle").append(games);
 
           if (searchName == "names") {
