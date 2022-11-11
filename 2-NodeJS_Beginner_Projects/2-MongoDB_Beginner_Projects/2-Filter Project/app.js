@@ -17,11 +17,17 @@ const connectDB = require("./database/db");
 // ROUTES
 const mainRoute = require("./routes/mainRoute");
 
+// BODY PARSER
+const bodyParser = require("body-parser");
+
+const path = require('path');
+
 // #endregion REQUESTS
 
 // MIDDLEWARES
-app.use(express.json());
-app.use(express.static("./public"))
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static("./public"));
 app.use("/api/games", mainRoute);
 
 // DATABASE CONNECTION AND APP START

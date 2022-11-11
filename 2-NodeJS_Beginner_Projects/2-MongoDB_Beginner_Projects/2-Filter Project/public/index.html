@@ -15,77 +15,57 @@
     ></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="./JS/getAll.js"></script>
+    <script src="./JS/postQuery.js"></script>
     <script src="./JS/main.js"></script>
     <main>
-      <header>
-        <div id="queryDiv">
-          <div id="searchDiv" class="grid transition">
-            <form method="get" id="searchSection" class="grid">
-              <input
-                type="search"
-                name=""
-                placeholder="Write your label here."
-                id="search"
-              />
-              <select name="" id="">
-                <option value="">1</option>
-                <option value="">2</option>
-                <option value="">3</option>
-                <option value="">4</option>
-                <option value="">5</option>
-              </select>
-            </form>
-            <div id="gameLibrary">Game<span id="library">L</span>ibrary</div>
-          </div>
-          <form method="get" id="labelForm" class="grid transition">
-            <div id="labelDiv" class="grid">
-              <div class="label grid pointer">
-                <input type="search" value="1" name="1" class="labels" />
-                <span class="delete transition grid pointer">X</span>
+      <form>
+        <header>
+          <div id="queryDiv" class="grid">
+            <div id="searchDiv" class="grid transition">
+              <div id="searchSection" class="grid">
+                <input
+                  type="search"
+                  name="names"
+                  placeholder="Write the game name here"
+                  id="search"
+                />
+                <div id="recommendDiv" class="grid"></div>
               </div>
-              <div class="label grid pointer">
-                <input type="search" value="2" name="1" class="labels" />
-                <span class="delete transition grid">X</span>
-              </div>
-              <div class="label grid pointer">
-                <input type="search" value="3" name="1" class="labels" />
-                <span class="delete transition grid">X</span>
-              </div>
-              <div class="label grid pointer">
-                <input type="search" value="4" name="1" class="labels" />
-                <span class="delete transition grid">X</span>
-              </div>
-              <div class="label grid pointer">
-                <input type="search" value="5" name="1" class="labels" />
-                <span class="delete transition grid">X</span>
-              </div>
-              <div class="label grid pointer">
-                <input type="search" value="6" name="1" class="labels" />
-                <span class="delete transition grid">X</span>
+              <div id="gameLibrary">Game<span id="library">L</span>ibrary</div>
+            </div>
+            <div id="labelForm">
+              <div id="labelDiv" class="grid"></div>
+              <div id="submitBtnDiv" class="grid">
+                <input
+                  type="submit"
+                  value="SEARCH"
+                  id="submitBtn"
+                  class="pointer transition"
+                />
               </div>
             </div>
+          </div>
+          <div id="arrowDiv" class="grid pointer transition">&#8659;</div>
+        </header>
+        <nav class="grid transition"></nav>
+        <section id="mainSection" class="grid">
+          <article id="gameArticle" class="grid"></article>
+        </section>
+        <footer>
+          <div>
             <input
-              type="submit"
-              value="SEARCH"
-              id="submitBtn"
-              class="pointer transition"
+              type="search"
+              name="page"
+              value="1"
+              id="page"
+              class="hidden"
             />
-          </form>
-        </div>
-        <div id="arrowDiv" class="grid pointer transition">&#8659;</div>
-      </header>
-      <nav class="grid transition"></nav>
-      <section id="mainSection" class="grid">
-        <article id="gameArticle" class="grid"></article>
-      </section>
-      <footer>
-        <form method="get">
-          <input type="search" name="page" value="1" id="page" class="hidden" />
-          <button type="submit" id="more" class="pointer grid transition">
-            &#10227;
-          </button>
-        </form>
-      </footer>
+            <button type="submit" id="more" class="pointer grid transition">
+              &#10227;
+            </button>
+          </div>
+        </footer>
+      </form>
     </main>
   </body>
 </html>
