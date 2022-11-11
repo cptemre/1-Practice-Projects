@@ -30,10 +30,8 @@ $(function () {
       $(".genres").mouseup(function (e) {
         slideFunc();
         let name = e.currentTarget.id;
-        $("#search").attr("class", name);
+        $("#search").attr("name", name);
       });
     },
   });
-
- 
 });
