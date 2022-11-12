@@ -1,4 +1,30 @@
 $(function () {
+  const games = ` <div class="games grid pointer">
+            <figure>
+              <img
+                src=""
+                alt=""
+                class="gameImg"
+              />
+              <figcaption class="transition grid">
+              </figcaption>
+            </figure></div>`;
+  const label = `<div class="label grid pointer">
+                  <input type="search" value="" name="" class="labels" />
+                  <span class="delete transition grid pointer">X</span>
+                </div>`;
+  let labelList = [
+    { names: "" },
+    { developers: "" },
+    { publishers: "" },
+    { engines: "" },
+    { platforms: "" },
+    { years: "" },
+    { genres: "" },
+    { modes: "" },
+  ];
+  let queryParams = "";
+  let url = `/api/games?${queryParams}`;
   // SEARCH FUNCTION
 
   const keyUpFunc = (data, searchName) => {
@@ -24,7 +50,7 @@ $(function () {
     }
     if (regList.length < 3) {
       $("#recommendDiv").css("display", "initial");
-      $("#recommendDİv").empty();
+      $("#recommendDiv").empty();
 
       for (let i = 0; i < regList.length; i++) {
         $("#recommendDiv").append(recommend);
@@ -38,16 +64,103 @@ $(function () {
       $("#recommendDiv").empty();
     }
   };
-  let labelList = [
-    { names: [] },
-    { developers: [] },
-    { publishers: [] },
-    { engines: [] },
-    { platforms: [] },
-    { years: [] },
-    { genres: [] },
-    { modes: [] },
-  ];
+  // RECOMMEND CLICK FUNCTION
+
+  const recommendClickFunc = () => {
+    $(".recommend").mouseup(function (e) {
+      // EMPTY WHOLE GAMES
+      $("#gameArticle").empty();
+      // RECOMMEND CLICK FUNCTION
+      recommendFunc(e);
+      // LABEL APPEND
+      queryParams = "";
+      $("#labelDiv").empty();
+      for (let i = 0; i < labelList.length; i++) {
+        for (const key in labelList[i]) {
+          if (labelList[i][key].length) {
+            // APPEND LABEL AND GIVE THE VALUE
+            $("#labelDiv").append(label);
+            $(`.labels:eq(-1)`).val(labelList[i][key]);
+            // QUERY IS PREPARED
+            queryParams += key + "=" + labelList[i][key] + "&";
+            console.log(labelList[i][key]);
+          }
+        }
+      }
+      // QUERY LAST "&" REMOVED
+      queryParams = queryParams.slice(0,-1)
+      console.log(queryParams);
+
+      console.log(labelList);
+
+      // $("#gameArticle").append(games);
+
+      // if (searchName == "names") {
+      //   for (let i = 0; i < data.length; i++) {
+      //     if (data[i]["names"] == $(".labels:eq(0)").val()) {
+      //       $(".gameImg").attr("src", data[i]["src"]);
+      //       break;
+      //     }
+      //     continue;
+      //   }
+      // }
+
+      // LABEL FUNCTIONS
+      $(".label").on({
+        keydown: (e) => {
+          e.preventDefault();
+        },
+        mouseenter: (e) => {
+          const deleteSign = $(e.currentTarget).children(".delete");
+          $(deleteSign).css({
+            transform: "scale(1)",
+            left: "-10rem",
+          });
+          $(deleteSign).on({
+            mouseenter: (e) => {
+              $(e.currentTarget).css({
+                backgroundColor: "var(--deleteColor)",
+              });
+            },
+            mouseleave: (e) => {
+              $(e.currentTarget).css({
+                backgroundColor: "var(--labelColor)",
+              });
+            },
+            mouseup: (e) => {
+              const label = $(e.currentTarget).parent();
+              $(label).remove();
+              console.log(label);
+            },
+          });
+        },
+        mouseleave: (e) => {
+          const deleteSign = $(e.currentTarget).children(".delete");
+          $(deleteSign).css({
+            transform: "scale(0)",
+            left: "-2rem",
+          });
+        },
+        mousedown: (e) => {
+          e.preventDefault();
+        },
+      });
+    });
+  };
+  const recommendFunc = (e) => {
+    const names = $(e.currentTarget).html();
+
+    // CREATES NEW KEY/VALUE PAIR IN LABELLIST OBJECT
+    for (let i = 0; i < labelList.length; i++) {
+      let labelI = labelList[i];
+      let objectLabelI = Object.keys(labelI);
+      if (objectLabelI == $("#label").html().toLowerCase()) {
+        console.log(labelI[objectLabelI]);
+        labelI[objectLabelI] = names;
+      }
+    }
+  };
+  recommendClickFunc();
 
   $("#search").on({
     keyup: () => {
@@ -60,111 +173,7 @@ $(function () {
         keyUpFunc(data, searchName);
         console.log(data);
         $(".recommend").unbind("mouseup");
-        $(".recommend").mouseup(function (e) {
-          if (searchName == "names") {
-            $("#labelDiv").empty();
-            $("#gameArticle").empty();
-          }
-          const games = ` <div class="games grid pointer">
-            <figure>
-              <img
-                src=""
-                alt=""
-                class="gameImg"
-              />
-              <figcaption class="transition grid">
-              </figcaption>
-            </figure></div>`;
-          const names = $(e.currentTarget).html();
-          const label = `<div class="label grid pointer">
-                  <input type="search" value="${names}" name="${searchName}" class="labels" />
-                  <span class="delete transition grid pointer">X</span>
-                </div>`;
-          for (let i = 0; i < labelList.length; i++) {
-            if (Object.keys(labelList[i]) == $("#label").html().toLowerCase()) {
-              labelList[i][Object.keys(labelList[i])].push(names);
-              labelList[i][Object.keys(labelList[i])] = [
-                ...new Set(labelList[i][Object.keys(labelList[i])]),
-              ];
-            }
-          }
-          $("#labelDiv").empty();
-          for (let i = 0; i < labelList.length; i++) {
-            for (const key in labelList[i]) {
-              if (labelList[i][key].length) {
-                $("#labelDiv").append(label);
-              }
-            }
-          }
-
-          console.log(labelList);
-
-          $("#gameArticle").append(games);
-
-          if (searchName == "names") {
-            for (let i = 0; i < data.length; i++) {
-              if (data[i]["names"] == $(".labels:eq(0)").val()) {
-                $(".gameImg").attr("src", data[i]["src"]);
-                break;
-              }
-              continue;
-            }
-          }
-          const queryList = [];
-
-          for (let i = 0; i < $(".labels").length; i++) {
-            queryList.push(
-              $(`.labels:eq(${i})`).attr("name") +
-                "=" +
-                $(`.labels:eq(${i})`).val()
-            );
-          }
-          const filteredGames = () => {
-            const url = `/api/games?`;
-          };
-          console.log(queryList);
-          filteredGames();
-          // LABEL FUNCTIONS
-          $(".label").on({
-            keydown: (e) => {
-              e.preventDefault();
-            },
-            mouseenter: (e) => {
-              const deleteSign = $(e.currentTarget).children(".delete");
-              $(deleteSign).css({
-                transform: "scale(1)",
-                left: "-10rem",
-              });
-              $(deleteSign).on({
-                mouseenter: (e) => {
-                  $(e.currentTarget).css({
-                    backgroundColor: "var(--deleteColor)",
-                  });
-                },
-                mouseleave: (e) => {
-                  $(e.currentTarget).css({
-                    backgroundColor: "var(--labelColor)",
-                  });
-                },
-                mouseup: (e) => {
-                  const label = $(e.currentTarget).parent();
-                  $(label).remove();
-                  console.log(label);
-                },
-              });
-            },
-            mouseleave: (e) => {
-              const deleteSign = $(e.currentTarget).children(".delete");
-              $(deleteSign).css({
-                transform: "scale(0)",
-                left: "-2rem",
-              });
-            },
-            mousedown: (e) => {
-              e.preventDefault();
-            },
-          });
-        });
+        recommendClickFunc();
       };
       query();
     },
