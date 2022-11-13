@@ -23,10 +23,44 @@ $(function () {
     { genres: "" },
     { modes: "" },
   ];
+  let page = 1;
+  let pages = "";
   let queryParams = "";
-  let url = `/api/games?${queryParams}`;
-  // SEARCH FUNCTION
+  let url = `/api/games?`;
+  // REFRESH FUNCTION
+  const urlSetFunc = async() => {
+    // QUERY LAST "&" REMOVED AND SET TO EMPTY STRING
+    console.log(queryParams);
+    pages = `&pages=${page}`;
+    queryParams += pages;
+    url += queryParams;
+    queryParams = "";
+    console.log(url);
+    const { data } = await axios.get(url);
+    console.log(url);
+    console.log(data);
+    // EMPTY WHOLE GAMES
+    $("#gameArticle").empty();
 
+    for (let i = 0; i < data.length; i++) {
+      $("#gameArticle").append(games);
+      $(`.gameImg:eq(${i})`).attr("src", data[i]["src"]);
+      $(`figcaption:eq(${i})`).html(data[i]["names"]);
+    }
+    url = "/api/games?";
+    console.log(labelList);
+  };
+  $("#more").mouseup(function () {
+    page++;
+    urlSetFunc();
+    $("html, body").animate(
+      {
+        scrollTop: $(document).height(),
+      },
+      "slow"
+    );
+  });
+  // SEARCH FUNCTION
   const keyUpFunc = (data, searchName) => {
     console.log(data.length);
     let regex = new RegExp($("#search").val(), "gi");
@@ -65,19 +99,16 @@ $(function () {
     }
   };
   // RECOMMEND CLICK FUNCTION
-
-  const recommendClickFunc = () => {
-    $(".recommend").mouseup(function (e) {
-      // EMPTY WHOLE GAMES
-      $("#gameArticle").empty();
-      // RECOMMEND CLICK FUNCTION
-      recommendFunc(e);
-      // LABEL APPEND
-      queryParams = "";
-      $("#labelDiv").empty();
+  const labelQueryFunction = (e) => {
+    // LABEL APPEND AND QUERY SET
+    $("#labelDiv").empty();
+    console.log($("#label").html());
+    // CHECK IF LABEL IS NAMES AND CREATE LABELS ACCORDING TO IT. IF LABEL IS NAMES THEN ONLY KEEP THE NAME
+    if ($("#label").html() !== "NAMES") {
+      labelList[0]["names"] = "";
       for (let i = 0; i < labelList.length; i++) {
         for (const key in labelList[i]) {
-          if (labelList[i][key].length) {
+          if (labelList[i][key].length && key !== "names") {
             // APPEND LABEL AND GIVE THE VALUE
             $("#labelDiv").append(label);
             $(`.labels:eq(-1)`).val(labelList[i][key]);
@@ -87,64 +118,74 @@ $(function () {
           }
         }
       }
-      // QUERY LAST "&" REMOVED
-      queryParams = queryParams.slice(0,-1)
-      console.log(queryParams);
+    } else {
+      // APPEND LABEL AND GIVE THE VALUE
+      $("#labelDiv").append(label);
+      $(`.labels:eq(-1)`).val(labelList[0]["names"]);
+      queryParams += `names=${labelList[0]["names"]}`;
+      for (let i = 0; i < labelList.length; i++) {
+        for (const key in labelList[i]) {
+          if (labelList[i][key].length && key !== "names") {
+            labelList[i][key] = "";
+          }
+        }
+      }
+      const target = $(e.currentTarget).html()
+    }
+    urlSetFunc();
+  };
+  // LABEL FUNCTIONS
+  const labelFunc = () => {
+    // LABEL FUNCTIONS
+    $(".label").on({
+      keydown: (e) => {
+        e.preventDefault();
+      },
+      mouseenter: (e) => {
+        const deleteSign = $(e.currentTarget).children(".delete");
+        $(deleteSign).css({
+          transform: "scale(1)",
+          left: "-10rem",
+        });
+        $(deleteSign).on({
+          mouseenter: (e) => {
+            $(e.currentTarget).css({
+              backgroundColor: "var(--deleteColor)",
+            });
+          },
+          mouseleave: (e) => {
+            $(e.currentTarget).css({
+              backgroundColor: "var(--labelColor)",
+            });
+          },
+          mouseup: (e) => {
+            const label = $(e.currentTarget).parent();
+            $(label).remove();
+            console.log(label);
+          },
+        });
+      },
+      mouseleave: (e) => {
+        const deleteSign = $(e.currentTarget).children(".delete");
+        $(deleteSign).css({
+          transform: "scale(0)",
+          left: "-2rem",
+        });
+      },
+      mousedown: (e) => {
+        e.preventDefault();
+      },
+    });
+  };
+  const recommendClickFunc = () => {
+    $(".recommend").mouseup(function (e) {
+      // RECOMMEND CLICK FUNCTION
+      recommendFunc(e);
+      // APPEND LABELS AND SET QUERY STRING
+      labelQueryFunction(e);
 
-      console.log(labelList);
-
-      // $("#gameArticle").append(games);
-
-      // if (searchName == "names") {
-      //   for (let i = 0; i < data.length; i++) {
-      //     if (data[i]["names"] == $(".labels:eq(0)").val()) {
-      //       $(".gameImg").attr("src", data[i]["src"]);
-      //       break;
-      //     }
-      //     continue;
-      //   }
-      // }
-
-      // LABEL FUNCTIONS
-      $(".label").on({
-        keydown: (e) => {
-          e.preventDefault();
-        },
-        mouseenter: (e) => {
-          const deleteSign = $(e.currentTarget).children(".delete");
-          $(deleteSign).css({
-            transform: "scale(1)",
-            left: "-10rem",
-          });
-          $(deleteSign).on({
-            mouseenter: (e) => {
-              $(e.currentTarget).css({
-                backgroundColor: "var(--deleteColor)",
-              });
-            },
-            mouseleave: (e) => {
-              $(e.currentTarget).css({
-                backgroundColor: "var(--labelColor)",
-              });
-            },
-            mouseup: (e) => {
-              const label = $(e.currentTarget).parent();
-              $(label).remove();
-              console.log(label);
-            },
-          });
-        },
-        mouseleave: (e) => {
-          const deleteSign = $(e.currentTarget).children(".delete");
-          $(deleteSign).css({
-            transform: "scale(0)",
-            left: "-2rem",
-          });
-        },
-        mousedown: (e) => {
-          e.preventDefault();
-        },
-      });
+      labelFunc();
+      $("#search").val();
     });
   };
   const recommendFunc = (e) => {
@@ -160,6 +201,7 @@ $(function () {
       }
     }
   };
+
   recommendClickFunc();
 
   $("#search").on({

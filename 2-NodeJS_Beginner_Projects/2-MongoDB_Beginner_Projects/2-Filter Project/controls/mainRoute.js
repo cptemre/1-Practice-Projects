@@ -35,7 +35,7 @@ const getAll = async (req, res) => {
     queries.modes = { $regex: modes, $options: "gi" };
   }
   const pages = Number(req.query.pages) || 1;
-  const limit = 9 * pages;
+  const limit = 3 * pages;
 
   let games = Games.find(queries);
   games = games.limit(limit);
