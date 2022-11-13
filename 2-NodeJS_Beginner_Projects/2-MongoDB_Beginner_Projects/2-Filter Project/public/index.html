@@ -23,14 +23,35 @@
           <div id="queryDiv" class="grid">
             <div id="searchDiv" class="grid transition">
               <div id="searchSection" class="grid">
-                <label for="search" id="label">NAMES</label>
+                <div class="labelDiv grid">
+                  <label for="search" id="label" class="label">NAMES</label>
+                  <input
+                    type="search"
+                    name="names"
+                    placeholder="Write the game name here"
+                    id="search"
+                    class="search"
+                  />
+                  <div id="recommendDiv" class="grid"></div>
+                </div>
+                <label for="year1" id="label1" class="year label">FROM</label>
                 <input
-                  type="search"
-                  name="names"
+                  type="number"
+                  name="from"
                   placeholder="Write the game name here"
-                  id="search"
+                  id="year1"
+                  class="search year"
                 />
-                <div id="recommendDiv" class="grid"></div>
+                <div class="yearsDiv grid"></div>
+                <label for="year2" id="label2" class="year label">TO</label>
+                <input
+                  type="number"
+                  name="to"
+                  placeholder="Write the game name here"
+                  id="year2"
+                  class="search year"
+                />
+                <div class="yearsDiv grid"></div>
               </div>
               <div id="gameLibrary">Game<span id="library">L</span>ibrary</div>
             </div>

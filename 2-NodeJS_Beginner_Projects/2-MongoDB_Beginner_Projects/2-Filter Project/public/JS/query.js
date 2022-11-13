@@ -26,12 +26,55 @@ $(function () {
   let page = 1;
   let pages = "";
   let queryParams = "";
+  let queryParamsBackup = "";
   let url = `/api/games?`;
+
+  // NAV FUNCTION
+  $("nav").on({
+    mouseenter: () => {
+      $(".genres").mouseup(function (e) {
+        let name = e.currentTarget.id;
+        $("#label").html(name.toUpperCase());
+        if (name == "years") {
+          $(".year").css("display", "initial");
+          $("#search, #label").css("display", "none");
+
+          $("#gameLibrary").unbind("mouseup");
+          $("#gameLibrary").mouseup(function () {
+            const from = $("#year1").attr("name");
+            const fromValue = $("#year1").val();
+            const toValue = $("#year2").val();
+            const yearQuery = fromValue + "," + toValue;
+
+            labelList[5]["years"] = yearQuery;
+            console.log(labelList);
+            // TEST
+            // RECOMMEND CLICK FUNCTION
+            recommendFunc(e);
+            // APPEND LABELS AND SET QUERY STRING
+            labelQueryFunction(e);
+
+            labelFunc();
+            $("#search").val("");
+            $("#recommendDiv").empty();
+            //TEST
+          });
+        } else {
+          $(".year").css("display", "none");
+          $("#search, #label").css("display", "initial");
+          $("#search").attr("name", name);
+        }
+        $(".search").val("");
+        $("#recommendDiv").empty();
+      });
+    },
+  });
   // REFRESH FUNCTION
-  const urlSetFunc = async() => {
+  const urlSetFunc = async () => {
     // QUERY LAST "&" REMOVED AND SET TO EMPTY STRING
     console.log(queryParams);
     pages = `&pages=${page}`;
+    queryParamsBackup = queryParams;
     queryParams += pages;
     url += queryParams;
     queryParams = "";
@@ -52,7 +95,31 @@ $(function () {
   };
   $("#more").mouseup(function () {
     page++;
-    urlSetFunc();
+    // TEST
+    // QUERY LAST "&" REMOVED AND SET TO EMPTY STRING
+    console.log(queryParams);
+    pages = `&pages=${page}`;
+    url += queryParamsBackup + pages;
+    queryParams = "";
+    console.log(url);
+    const newData = async () => {
+      const { data } = await axios.get(url);
+      console.log(data);
+      // EMPTY WHOLE GAMES
+      $("#gameArticle").empty();
+
+      for (let i = 0; i < data.length; i++) {
+        $("#gameArticle").append(games);
+        $(`.gameImg:eq(${i})`).attr("src", data[i]["src"]);
+        $(`figcaption:eq(${i})`).html(data[i]["names"]);
+      }
+      url = "/api/games?";
+      console.log(labelList);
+    };
+    newData();
+    console.log(url);
+    
+    //TEST
     $("html, body").animate(
       {
         scrollTop: $(document).height(),
@@ -119,19 +186,24 @@ $(function () {
         }
       }
     } else {
-      // APPEND LABEL AND GIVE THE VALUE
-      $("#labelDiv").append(label);
-      $(`.labels:eq(-1)`).val(labelList[0]["names"]);
-      queryParams += `names=${labelList[0]["names"]}`;
-      for (let i = 0; i < labelList.length; i++) {
-        for (const key in labelList[i]) {
-          if (labelList[i][key].length && key !== "names") {
-            labelList[i][key] = "";
+      if (!$("#label").html() == "YEARS") {
+        $("#labelDiv").append(label);
+        $(`.labels:eq(-1)`).val(labelList[5]["years"]);
+      } else {
+        // APPEND LABEL AND GIVE THE VALUE
+        $("#labelDiv").append(label);
+        $(`.labels:eq(-1)`).val(labelList[0]["names"]);
+        queryParams += `names=${labelList[0]["names"]}`;
+        for (let i = 0; i < labelList.length; i++) {
+          for (const key in labelList[i]) {
+            if (labelList[i][key].length && key !== "names") {
+              labelList[i][key] = "";
+            }
           }
         }
       }
-      const target = $(e.currentTarget).html()
     }
+    queryParamsBackup = queryParams;
     urlSetFunc();
   };
   // LABEL FUNCTIONS
@@ -185,7 +257,8 @@ $(function () {
       labelQueryFunction(e);
 
       labelFunc();
-      $("#search").val();
+      $("#search").val("");
+      $("#recommendDiv").empty();
     });
   };
   const recommendFunc = (e) => {
@@ -200,6 +273,11 @@ $(function () {
         labelI[objectLabelI] = names;
       }
     }
+    const fromValue = $("#year1").val();
+    const toValue = $("#year2").val();
+    const yearQuery = fromValue && toValue ? fromValue + "-" + toValue : "";
+
+    labelList[5]["years"] = yearQuery;
   };
 
   recommendClickFunc();

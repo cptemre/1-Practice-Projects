@@ -64,6 +64,17 @@ input[type="search"]::-webkit-search-results-decoration {
   display: none;
 }
 
+/* Remove number type arrows in input */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  appearance: none;
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] {
+  appearance: textfield;
+  -moz-appearance: textfield;
+}
 #queryDiv {
   grid-row-gap: 0;
 }
@@ -84,11 +95,11 @@ input[type="search"]::-webkit-search-results-decoration {
   height: auto;
 }
 
-#label {
+.label {
   color: var(--selectColor);
 }
 
-#search {
+.search {
   width: 15rem;
   height: 2rem;
   border-bottom-right-radius: 5rem;
@@ -97,7 +108,12 @@ input[type="search"]::-webkit-search-results-decoration {
   color: white;
 }
 
-#recommendDiv {
+.year {
+  display: none;
+}
+
+#recommendDiv,
+.yearsDiv {
   width: 15rem;
   position: relative;
   z-index: 5;

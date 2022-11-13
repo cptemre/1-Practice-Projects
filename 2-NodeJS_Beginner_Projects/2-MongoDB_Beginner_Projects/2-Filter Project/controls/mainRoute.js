@@ -16,17 +16,22 @@ const getAll = async (req, res) => {
   if (names) {
     queries.names = { $regex: names, $options: "gi" };
   }
-    if (developers) {
-      queries.developers = { $regex: developers, $options: "gi" };
+  if (developers) {
+    queries.developers = { $regex: developers, $options: "gi" };
   }
-    if (publishers) {
-      queries.publishers = { $regex: publishers, $options: "gi" };
-    }
-    if (engines) {
-      queries.engines = { $regex: engines, $options: "gi" };
-    }
-    if (platforms) {
-      queries.platforms = { $regex: platforms, $options: "gi" };
+  if (publishers) {
+    queries.publishers = { $regex: publishers, $options: "gi" };
+  }
+  if (engines) {
+    queries.engines = { $regex: engines, $options: "gi" };
+  }
+  if (platforms) {
+    queries.platforms = { $regex: platforms, $options: "gi" };
+  }
+  if (years) {
+    let yearsSplit = years.split("-")
+    queries.years = { $gte: Number(yearsSplit[0]), $lte: Number(yearsSplit[1]) };
+    console.log(yearsSplit);
   }
   if (genres) {
     queries.genres = { $regex: genres, $options: "gi" };
