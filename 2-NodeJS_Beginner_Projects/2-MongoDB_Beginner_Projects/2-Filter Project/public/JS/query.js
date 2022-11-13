@@ -23,6 +23,7 @@ $(function () {
     { genres: "" },
     { modes: "" },
   ];
+
   let page = 1;
   let pages = "";
   let queryParams = "";
@@ -41,12 +42,10 @@ $(function () {
 
           $("#gameLibrary").unbind("mouseup");
           $("#gameLibrary").mouseup(function () {
-            const from = $("#year1").attr("name");
             const fromValue = $("#year1").val();
             const toValue = $("#year2").val();
-            const yearQuery = fromValue + "," + toValue;
-
-            labelList[5]["years"] = yearQuery;
+            const yearQuery = fromValue + "-" + toValue;
+            $("#gameLibrary").attr("class", yearQuery);
             console.log(labelList);
             // TEST
             // RECOMMEND CLICK FUNCTION
@@ -118,7 +117,7 @@ $(function () {
     };
     newData();
     console.log(url);
-    
+
     //TEST
     $("html, body").animate(
       {
@@ -169,36 +168,39 @@ $(function () {
   const labelQueryFunction = (e) => {
     // LABEL APPEND AND QUERY SET
     $("#labelDiv").empty();
-    console.log($("#label").html());
+    console.log($(labelList));
     // CHECK IF LABEL IS NAMES AND CREATE LABELS ACCORDING TO IT. IF LABEL IS NAMES THEN ONLY KEEP THE NAME
     if ($("#label").html() !== "NAMES") {
       labelList[0]["names"] = "";
       for (let i = 0; i < labelList.length; i++) {
         for (const key in labelList[i]) {
-          if (labelList[i][key].length && key !== "names") {
+          if (labelList[i][key] && key !== "names") {
             // APPEND LABEL AND GIVE THE VALUE
             $("#labelDiv").append(label);
             $(`.labels:eq(-1)`).val(labelList[i][key]);
+            $(`.labels:eq(-1)`).attr("name", key);
+            $(`.labels:eq(-1)`).attr("class", "labels " + labelList[i][key]);
             // QUERY IS PREPARED
-            queryParams += key + "=" + labelList[i][key] + "&";
+            if (key == "years") {
+              queryParams += `years=${labelList[5]["years"]}`;
+            } else {
+              queryParams += key + "=" + labelList[i][key] + "&";
+            }
             console.log(labelList[i][key]);
           }
         }
       }
     } else {
-      if (!$("#label").html() == "YEARS") {
-        $("#labelDiv").append(label);
-        $(`.labels:eq(-1)`).val(labelList[5]["years"]);
-      } else {
-        // APPEND LABEL AND GIVE THE VALUE
-        $("#labelDiv").append(label);
-        $(`.labels:eq(-1)`).val(labelList[0]["names"]);
-        queryParams += `names=${labelList[0]["names"]}`;
-        for (let i = 0; i < labelList.length; i++) {
-          for (const key in labelList[i]) {
-            if (labelList[i][key].length && key !== "names") {
-              labelList[i][key] = "";
-            }
+      // APPEND LABEL AND GIVE THE VALUE
+      $("#labelDiv").append(label);
+      $(`.labels:eq(-1)`).val(labelList[0]["names"]);
+      $(`.labels:eq(-1)`).attr("name", "names");
+      $(`.labels:eq(-1)`).attr("class", "labels " + labelList[0]["names"]);
+      queryParams += `names=${labelList[0]["names"]}`;
+      for (let i = 0; i < labelList.length; i++) {
+        for (const key in labelList[i]) {
+          if (labelList[i][key] && key !== "names") {
+            labelList[i][key] = "";
           }
         }
       }
@@ -206,6 +208,7 @@ $(function () {
     queryParamsBackup = queryParams;
     urlSetFunc();
   };
+
   // LABEL FUNCTIONS
   const labelFunc = () => {
     // LABEL FUNCTIONS
@@ -233,7 +236,34 @@ $(function () {
           mouseup: (e) => {
             const label = $(e.currentTarget).parent();
             $(label).remove();
-            console.log(label);
+
+            // LOOP LABELLIST TO CHECK IF IT MATCHES WITH LABEL CLASS NAME. IF SO UPDATE THE KEY, IF NOT ASSIGN ""
+            if ($(".labels").length) {
+              for (let i = 0; i < labelList.length; i++) {
+                for (const key in labelList[i]) {
+                  for (let y = 0; y < $(".labels").length; y++) {
+                    let labelName = $(`.labels:eq(${y})`).attr("name");
+                    let labelVal = $(`.labels:eq(${y})`).attr("class");
+                    labelVal = labelVal.replace("labels ", "");
+
+                    if (key == labelName) {
+                      labelList[i][key] = labelVal;
+                    } else {
+                      labelList[i][key] = "";
+                    }
+                  }
+                }
+              }
+            } else {
+              for (let i = 0; i < labelList.length; i++) {
+                for (const key in labelList[i]) {
+                  labelList[i][key] = "";
+                }
+              }
+            }
+
+            labelQueryFunction();
+            console.log(labelList);
           },
         });
       },
@@ -263,7 +293,7 @@ $(function () {
   };
   const recommendFunc = (e) => {
     const names = $(e.currentTarget).html();
-
+    console.log(labelList);
     // CREATES NEW KEY/VALUE PAIR IN LABELLIST OBJECT
     for (let i = 0; i < labelList.length; i++) {
       let labelI = labelList[i];
@@ -273,11 +303,10 @@ $(function () {
         labelI[objectLabelI] = names;
       }
     }
-    const fromValue = $("#year1").val();
-    const toValue = $("#year2").val();
-    const yearQuery = fromValue && toValue ? fromValue + "-" + toValue : "";
+    console.log(labelList);
 
-    labelList[5]["years"] = yearQuery;
+    labelList[5]["years"] = $("#gameLibrary").attr("class");
+    console.log(labelList);
   };
 
   recommendClickFunc();
