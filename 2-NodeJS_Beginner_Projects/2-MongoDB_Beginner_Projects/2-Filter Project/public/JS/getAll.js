@@ -37,11 +37,22 @@ $(function () {
     // DOM ELEMENTS
 
     // CREATE NAVBAR
+      const colors = [
+        "#FF595E",
+        "#6A4C93",
+        "#A4036F",
+        "#FEEFE5",
+        "#EE6123",
+        "#A6B1E1",
+        "#C1666B",
+        "#E24E1B",
+      ];
     for (let i = 0; i < titles.length; i++) {
       const navElement = `<div class="genres pointer transition"></div>`;
       $("nav").append(navElement);
       $(`.genres:eq(${i})`).html(titles[i].toUpperCase());
       $(`.genres:eq(${i})`).attr("id", titles[i]);
+      $(`.genres:eq(${i})`).css("border-color", colors[i]);
     }
 
     // CREATE MAIN MENU GAMES

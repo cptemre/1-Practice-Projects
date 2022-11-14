@@ -1,4 +1,5 @@
 $(function () {
+  // HTML ELEMENT VARIABLES
   const games = ` <div class="games grid pointer">
             <figure>
               <img
@@ -13,6 +14,7 @@ $(function () {
                   <input type="search" value="" name="" class="labels" />
                   <span class="delete transition grid pointer">X</span>
                 </div>`;
+  // AN OBJECT TO GET QUERIES
   let labelList = [
     { names: "" },
     { developers: "" },
@@ -23,27 +25,14 @@ $(function () {
     { genres: "" },
     { modes: "" },
   ];
-  let platforms = [
-    "Microsoft Windows",
-    "PlayStation 4",
-    "PlayStation 5",
-    "Xbox One",
-    "Xbox Series X",
-    "Xbox Series S",
-    "macOS",
-    "Nintendo Switch",
-    "Linux",
-    "Stadia",
-    "Amazon Luna",
-    "iPadOS",
-  ];
+  // URL AND QUERY VARIABLES
   let page = 1;
   let pages = "";
   let queryParams = "";
   let queryParamsBackup = "";
   let url = `/api/games?`;
 
-  // NAV FUNCTION
+  // NAV FUNCTION - SETS LABEL HTML ACCORDING TO CLICKED NAV OPTION
   $("nav").on({
     mouseenter: () => {
       $(".genres").mouseup(function (e) {
@@ -54,23 +43,13 @@ $(function () {
           $("#buttonDiv").css("display", "grid");
           $("#search, #label").css("display", "none");
 
-          $("#gameLibrary").unbind("mouseup");
-          $("#gameLibrary").mouseup(function () {
+          $("#submitBtn").unbind("mouseup");
+          $("#submitBtn").mouseup(function () {
             const fromValue = $("#year1").val();
             const toValue = $("#year2").val();
             const yearQuery = fromValue + "-" + toValue;
             $("#gameLibrary").attr("class", yearQuery);
-            console.log(labelList);
-            // TEST
-            // RECOMMEND CLICK FUNCTION
-            recommendFunc(e);
-            // APPEND LABELS AND SET QUERY STRING
-            labelQueryFunction(e);
-
-            labelFunc();
-            $("#search").val("");
-            $("#recommendDiv").empty();
-            //TEST
+            searchFunc(e);
           });
         } else {
           $(".year").css("display", "none");
@@ -86,16 +65,13 @@ $(function () {
   // REFRESH FUNCTION
   const urlSetFunc = async () => {
     // QUERY LAST "&" REMOVED AND SET TO EMPTY STRING
-    console.log(queryParams);
     pages = `&pages=${page}`;
     queryParamsBackup = queryParams;
     queryParams += pages;
     url += queryParams;
     queryParams = "";
-    console.log(url);
     const { data } = await axios.get(url);
-    console.log(url);
-    console.log(data);
+
     // EMPTY WHOLE GAMES
     $("#gameArticle").empty();
 
@@ -105,34 +81,10 @@ $(function () {
       $(`figcaption:eq(${i})`).html(data[i]["names"]);
     }
     url = "/api/games?";
-    console.log(labelList);
   };
   $("#more").mouseup(function () {
     page++;
-    // TEST
-    // QUERY LAST "&" REMOVED AND SET TO EMPTY STRING
-    console.log(queryParams);
-    pages = `&pages=${page}`;
-    url += queryParamsBackup + pages;
-    queryParams = "";
-    console.log(url);
-    const newData = async () => {
-      const { data } = await axios.get(url);
-      console.log(data);
-      // EMPTY WHOLE GAMES
-      $("#gameArticle").empty();
-
-      for (let i = 0; i < data.length; i++) {
-        $("#gameArticle").append(games);
-        $(`.gameImg:eq(${i})`).attr("src", data[i]["src"]);
-        $(`figcaption:eq(${i})`).html(data[i]["names"]);
-      }
-      url = "/api/games?";
-      console.log(labelList);
-    };
-    newData();
-    console.log(url);
-
+    labelQueryFunction();
     //TEST
     $("html, body").animate(
       {
@@ -141,22 +93,19 @@ $(function () {
       "slow"
     );
   });
-  // SEARCH FUNCTION
+  // SEARCH FUNCTION - GET DATA AND A KEY NAME TO LOOP
   const keyUpFunc = (data, searchName) => {
-    console.log(data.length);
     let regex = new RegExp($("#search").val(), "gi");
     let regList = [];
     const recommend = `<div class="recommend transition pointer grid"></div>`;
     for (let i = 0; i < data.length; i++) {
       let name = data[i][searchName];
-      console.log(name);
-      //TEST
+      // CHECK THE VALUE IS AN ARRAY OR NOT THEN PUSH THE VALUES TO REGLIST ARRAY - REMOVE THE DUBLICATES
       if (!Array.isArray(name)) {
         regList.push(name);
       } else {
         name = name.join().split(",");
         name = [...new Set(name)];
-        console.log(name);
 
         for (let i = 0; i < name.length; i++) {
           if (name[i].match(regex)) {
@@ -165,9 +114,9 @@ $(function () {
         }
       }
       regList = [...new Set(regList)];
-      console.log(regList);
     }
-    //TEST
+
+    // CHECK THE DATA LENGTH - ACCORDING TO THAT ADD RECOMMEND DIV TO HTML TO SHOW RECOMMENDED REGULAR EXPRESSION RESULTS
     if (regList.length >= 3) {
       $("#recommendDiv").css("display", "initial");
       while ($(".recommend").length < 3) {
@@ -192,13 +141,11 @@ $(function () {
     if ($("#search").val() == "") {
       $("#recommendDiv").empty();
     }
-    console.log(regList);
   };
-  // RECOMMEND CLICK FUNCTION
-  const labelQueryFunction = (e) => {
-    // LABEL APPEND AND QUERY SET
+
+  // EMPTY AND CREATE LABELS FROM THE VALUES OF LABELLIST KEYS
+  const labelQueryFunction = () => {
     $("#labelDiv").empty();
-    console.log($(labelList));
     // CHECK IF LABEL IS NAMES AND CREATE LABELS ACCORDING TO IT. IF LABEL IS NAMES THEN ONLY KEEP THE NAME
     if ($("#label").html() !== "NAMES") {
       labelList[0]["names"] = "";
@@ -216,12 +163,11 @@ $(function () {
             } else {
               queryParams += key + "=" + labelList[i][key] + "&";
             }
-            console.log(labelList[i][key]);
           }
         }
       }
     } else {
-      // APPEND LABEL AND GIVE THE VALUE
+      // APPEND LABEL FOR NAME AND GIVE THE VALUE
       $("#labelDiv").append(label);
       $(`.labels:eq(-1)`).val(labelList[0]["names"]);
       $(`.labels:eq(-1)`).attr("name", "names");
@@ -241,7 +187,8 @@ $(function () {
     // URL SET FUNCTION
     urlSetFunc();
   };
-  // LABEL FUNCTIONS
+
+  // LABEL FUNCTIONS TO CONTROL ANIMATIONS AND DELETE FUNCTIONS
   const labelFunc = () => {
     // LABEL FUNCTIONS
     $(".label").on({
@@ -267,10 +214,10 @@ $(function () {
           },
           mouseup: (e) => {
             const label = $(e.currentTarget).parent();
-            console.log(label);
             $(label).remove();
             queryParams = "";
-            // LOOP LABELLIST TO CHECK IF IT MATCHES WITH LABEL CLASS NAME. IF SO UPDATE THE KEY, IF NOT ASSIGN ""
+            page = 1;
+            // LOOP LABELLIST TO CHECK IF IT MATCHES WITH LABEL CLASS NAME. IF SO UPDATE THE KEY, IF NOT ASSIGN "" AND SET A NEW QUERYPARAMS
             if ($(".labels").length) {
               for (let i = 0; i < labelList.length; i++) {
                 for (const key in labelList[i]) {
@@ -297,32 +244,10 @@ $(function () {
                 }
               }
             }
-            const testFunc = async () => {
-              console.log(queryParams);
-              pages = `&pages=${page}`;
-              queryParamsBackup = queryParams;
-              queryParams += pages;
-              url += queryParams;
-              queryParams = "";
-              console.log(url);
-              const { data } = await axios.get(url);
-              console.log(url);
-              console.log(data);
-              // EMPTY WHOLE GAMES
-              $("#gameArticle").empty();
-
-              for (let i = 0; i < data.length; i++) {
-                $("#gameArticle").append(games);
-                $(`.gameImg:eq(${i})`).attr("src", data[i]["src"]);
-                $(`figcaption:eq(${i})`).html(data[i]["names"]);
-              }
-              url = "/api/games?";
-              console.log(labelList);
-            };
-            testFunc();
+            // GET DATA WITH URL + QUERY
+            urlSetFunc();
             // RECURSION TO REPEAT LABEL EVENTS
             labelFunc();
-            console.log(labelList);
           },
         });
       },
@@ -339,48 +264,53 @@ $(function () {
     });
   };
 
+  // ALL FUNCTIONS TOGETHER TO SET QUERY, BRING DATA AND CREATE LABELS
+  const searchFunc = (e) => {
+    page = 1;
+    // RECOMMEND CLICK FUNCTION
+    recommendFunc(e);
+    // APPEND LABELS AND SET QUERY STRING
+    labelQueryFunction(e);
+    // LABEL FUNCTIONS
+    labelFunc();
+    // EMPTY INPUTS AND RECOMMENDDIV
+    $(".search").val("");
+    $("#recommendDiv").empty();
+  };
+
+  // RECOMMEND DIV FUNCTIONS
   const recommendClickFunc = () => {
     $(".recommend").mouseup(function (e) {
-      // RECOMMEND CLICK FUNCTION
-      recommendFunc(e);
-      // APPEND LABELS AND SET QUERY STRING
-      labelQueryFunction(e);
-
-      labelFunc();
-      $("#search").val("");
-      $("#recommendDiv").empty();
+      searchFunc(e);
     });
   };
+  // CREATES NEW KEY/VALUE PAIR IN LABELLIST OBJECT
   const recommendFunc = (e) => {
     const names = $(e.currentTarget).html();
-    console.log(labelList);
-    // CREATES NEW KEY/VALUE PAIR IN LABELLIST OBJECT
     for (let i = 0; i < labelList.length; i++) {
       let labelI = labelList[i];
       let objectLabelI = Object.keys(labelI);
       if (objectLabelI == $("#label").html().toLowerCase()) {
-        console.log(labelI[objectLabelI]);
         labelI[objectLabelI] = names;
       }
     }
-    console.log(labelList);
-
+    // SETS YEAR VALUE TO GAMELIBRARY CLASS
     labelList[5]["years"] = $("#gameLibrary").attr("class");
-    console.log(labelList);
   };
 
-  recommendClickFunc();
-
+  // SEARCH INPUT KEYUP FUNCTION
   $("#search").on({
     keyup: () => {
       const searchName = $("#search").attr("name");
       const searchVal = $("#search").val();
+      // REQUEST TO GET REGEX DATA FROM SERVER WITH KEY VALUE PAIR
       const query = async () => {
         const { data } = await axios.get(
           `/api/games?${searchName}=${searchVal}`
         );
+        // RECOMMEND CREATE FUNCTION
         keyUpFunc(data, searchName);
-        console.log(data);
+        // RECOMMEND FUNCTIONS
         $(".recommend").unbind("mouseup");
         recommendClickFunc();
       };
