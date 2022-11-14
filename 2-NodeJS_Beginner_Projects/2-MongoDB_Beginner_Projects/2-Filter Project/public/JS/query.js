@@ -152,11 +152,9 @@ $(function () {
       console.log(name);
       //TEST
       if (!Array.isArray(name)) {
-        if (name.match(regex)) {
-          regList.push(name);
-        }
+        regList.push(name);
       } else {
-        name = name.split(",");
+        name = name.join().split(",");
         name = [...new Set(name)];
         console.log(name);
 
@@ -271,7 +269,7 @@ $(function () {
             const label = $(e.currentTarget).parent();
             console.log(label);
             $(label).remove();
-
+            queryParams = "";
             // LOOP LABELLIST TO CHECK IF IT MATCHES WITH LABEL CLASS NAME. IF SO UPDATE THE KEY, IF NOT ASSIGN ""
             if ($(".labels").length) {
               for (let i = 0; i < labelList.length; i++) {
@@ -286,6 +284,9 @@ $(function () {
                     } else {
                       labelList[i][key] = "";
                     }
+                    if (labelList[i][key]) {
+                      queryParams += key + "=" + labelList[i][key];
+                    }
                   }
                 }
               }
@@ -296,8 +297,29 @@ $(function () {
                 }
               }
             }
-            // TO CALL DATA WITH QUERY
-            urlSetFunc();
+            const testFunc = async () => {
+              console.log(queryParams);
+              pages = `&pages=${page}`;
+              queryParamsBackup = queryParams;
+              queryParams += pages;
+              url += queryParams;
+              queryParams = "";
+              console.log(url);
+              const { data } = await axios.get(url);
+              console.log(url);
+              console.log(data);
+              // EMPTY WHOLE GAMES
+              $("#gameArticle").empty();
+
+              for (let i = 0; i < data.length; i++) {
+                $("#gameArticle").append(games);
+                $(`.gameImg:eq(${i})`).attr("src", data[i]["src"]);
+                $(`figcaption:eq(${i})`).html(data[i]["names"]);
+              }
+              url = "/api/games?";
+              console.log(labelList);
+            };
+            testFunc();
             // RECURSION TO REPEAT LABEL EVENTS
             labelFunc();
             console.log(labelList);
