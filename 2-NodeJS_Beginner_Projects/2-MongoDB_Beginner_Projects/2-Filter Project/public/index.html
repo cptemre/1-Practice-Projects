@@ -34,24 +34,39 @@
                   />
                   <div id="recommendDiv" class="grid"></div>
                 </div>
-                <label for="year1" id="label1" class="year label">FROM</label>
-                <input
-                  type="number"
-                  name="from"
-                  placeholder="Write the game name here"
-                  id="year1"
-                  class="search year"
-                />
-                <div class="yearsDiv grid"></div>
-                <label for="year2" id="label2" class="year label">TO</label>
-                <input
-                  type="number"
-                  name="to"
-                  placeholder="Write the game name here"
-                  id="year2"
-                  class="search year"
-                />
-                <div class="yearsDiv grid"></div>
+                <div class="grid" id="yearsDiv">
+                  <div class="grid">
+                    <label for="year1" id="label1" class="year label"
+                      >FROM</label
+                    >
+                    <input
+                      type="number"
+                      name="from"
+                      placeholder="Write the game name here"
+                      id="year1"
+                      class="search year"
+                    />
+                  </div>
+                  <div class="grid">
+                    <label for="year2" id="label2" class="year label">TO</label>
+                    <input
+                      type="number"
+                      name="to"
+                      placeholder="Write the game name here"
+                      id="year2"
+                      class="search year"
+                    />
+                  </div>
+                  <div class="grid" id="buttonDiv">
+                  <input
+                    type="button"
+                    value="SEARCH"
+                    id="submitBtn"
+                    class="pointer transition"
+                  />
+                </div>
+                </div>
+                
               </div>
               <div id="gameLibrary">Game<span id="library">L</span>ibrary</div>
             </div>

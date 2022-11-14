@@ -95,6 +95,30 @@ input[type="number"] {
   height: auto;
 }
 
+#yearsDiv {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+#buttonDiv {
+  height: 100%;
+  place-items: flex-end;
+  display: none;
+  position: relative;
+}
+
+#submitBtn {
+  height: 2rem;
+  width: 5rem;
+  background-color: var(--submitRed);
+  transform: translateY(-1rem);
+  position: relative;
+  top: 0.8rem;
+}
+
+#submitBtn:hover {
+  background-color: var(--submitHoverRed);
+}
+
 .label {
   color: var(--selectColor);
 }

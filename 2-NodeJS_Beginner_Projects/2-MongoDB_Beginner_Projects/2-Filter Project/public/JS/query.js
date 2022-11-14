@@ -23,7 +23,20 @@ $(function () {
     { genres: "" },
     { modes: "" },
   ];
-
+  let platforms = [
+    "Microsoft Windows",
+    "PlayStation 4",
+    "PlayStation 5",
+    "Xbox One",
+    "Xbox Series X",
+    "Xbox Series S",
+    "macOS",
+    "Nintendo Switch",
+    "Linux",
+    "Stadia",
+    "Amazon Luna",
+    "iPadOS",
+  ];
   let page = 1;
   let pages = "";
   let queryParams = "";
@@ -38,6 +51,7 @@ $(function () {
         $("#label").html(name.toUpperCase());
         if (name == "years") {
           $(".year").css("display", "initial");
+          $("#buttonDiv").css("display", "grid");
           $("#search, #label").css("display", "none");
 
           $("#gameLibrary").unbind("mouseup");
@@ -60,6 +74,7 @@ $(function () {
           });
         } else {
           $(".year").css("display", "none");
+          $("#buttonDiv").css("display", "none");
           $("#search, #label").css("display", "initial");
           $("#search").attr("name", name);
         }
@@ -134,11 +149,27 @@ $(function () {
     const recommend = `<div class="recommend transition pointer grid"></div>`;
     for (let i = 0; i < data.length; i++) {
       let name = data[i][searchName];
-      if (name.match(regex)) {
-        regList.push(name);
-        regList = [...new Set(regList)];
+      console.log(name);
+      //TEST
+      if (!Array.isArray(name)) {
+        if (name.match(regex)) {
+          regList.push(name);
+        }
+      } else {
+        name = name.split(",");
+        name = [...new Set(name)];
+        console.log(name);
+
+        for (let i = 0; i < name.length; i++) {
+          if (name[i].match(regex)) {
+            regList.push(name[i]);
+          }
+        }
       }
+      regList = [...new Set(regList)];
+      console.log(regList);
     }
+    //TEST
     if (regList.length >= 3) {
       $("#recommendDiv").css("display", "initial");
       while ($(".recommend").length < 3) {
@@ -163,6 +194,7 @@ $(function () {
     if ($("#search").val() == "") {
       $("#recommendDiv").empty();
     }
+    console.log(regList);
   };
   // RECOMMEND CLICK FUNCTION
   const labelQueryFunction = (e) => {
@@ -206,9 +238,11 @@ $(function () {
       }
     }
     queryParamsBackup = queryParams;
+    // CALLS LABEL EVENTS
+    labelFunc();
+    // URL SET FUNCTION
     urlSetFunc();
   };
-
   // LABEL FUNCTIONS
   const labelFunc = () => {
     // LABEL FUNCTIONS
@@ -235,6 +269,7 @@ $(function () {
           },
           mouseup: (e) => {
             const label = $(e.currentTarget).parent();
+            console.log(label);
             $(label).remove();
 
             // LOOP LABELLIST TO CHECK IF IT MATCHES WITH LABEL CLASS NAME. IF SO UPDATE THE KEY, IF NOT ASSIGN ""
@@ -261,8 +296,10 @@ $(function () {
                 }
               }
             }
-
-            labelQueryFunction();
+            // TO CALL DATA WITH QUERY
+            urlSetFunc();
+            // RECURSION TO REPEAT LABEL EVENTS
+            labelFunc();
             console.log(labelList);
           },
         });
@@ -279,6 +316,7 @@ $(function () {
       },
     });
   };
+
   const recommendClickFunc = () => {
     $(".recommend").mouseup(function (e) {
       // RECOMMEND CLICK FUNCTION

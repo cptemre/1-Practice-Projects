@@ -25,9 +25,7 @@ const getAll = async (req, res) => {
   if (engines) {
     queries.engines = { $regex: engines, $options: "gi" };
   }
-  if (platforms) {
-    queries.platforms = { $regex: platforms, $options: "gi" };
-  }
+
   if (years) {
     let yearsSplit = years.split("-")
     queries.years = { $gte: Number(yearsSplit[0]), $lte: Number(yearsSplit[1]) };
@@ -42,8 +40,10 @@ const getAll = async (req, res) => {
   const pages = Number(req.query.pages) || 1;
   const limit = 3 * pages;
 
+  let split = Games.find({$split: p});
+  
   let games = Games.find(queries);
-  games = games.limit(limit);
+  games = (await games.limit(limit));
   const result = await games;
   if (!games)
     throw new Error("There are no games in our database at the moment.");
