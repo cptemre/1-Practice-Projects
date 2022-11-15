@@ -1,11 +1,11 @@
 $(function () {
   // HTML ELEMENT VARIABLES
-  const games = ` <div class="games grid pointer">
-            <figure>
+  const games = ` <div class="games grid pointer transition">
+            <figure class="transition">
               <img
                 src=""
                 alt=""
-                class="gameImg"
+                class="gameImg transition"
               />
               <figcaption class="transition grid">
               </figcaption>
@@ -62,7 +62,83 @@ $(function () {
       });
     },
   });
-  // REFRESH FUNCTION
+  // BASE DATA REQUEST
+  const dataFunc = async () => {
+    const { data } = await axios.get("/api/games");
+    createGames(data);
+  };
+  dataFunc();
+  // GAME APPEND FUNC
+  const createGames = (data) => {
+    for (let i = 0; i < data.length; i++) {
+      $("#gameArticle").append(games);
+      $(`.gameImg:eq(${i})`).attr("src", data[i]["src"]);
+      $(`figcaption:eq(${i})`).html(data[i]["names"]);
+    }
+
+    const gamesMouseFunc = (e) => {
+      const gamesDiv = $(e.currentTarget);
+      const figure = gamesDiv.children("figure");
+      const gameImg = figure.children(".gameImg");
+      const figcaption = figure.children("figcaption");
+      $(gamesDiv).css({
+        width: "20vh",
+      });
+      $(figure).css({
+        width: "100%",
+      });
+      $(gameImg).css({
+        transform: "scale(1.5)",
+      });
+      $(figcaption).css({
+        color: "red",
+      });
+    };
+    const gameFunc = () => {
+      $(".games").on({
+        mouseenter: (e) => {
+          const gamesDiv = $(e.currentTarget);
+          const figure = gamesDiv.children("figure");
+          const gameImg = figure.children(".gameImg");
+          const figcaption = figure.children("figcaption");
+$(figure).css({
+  height: "25rem",
+  width: "16rem",
+  borderRadius: "1.2rem",
+  borderWidth: "5px"
+});
+          $(gameImg).css({
+            transform: "scale(1.3)",
+          });
+          $(figcaption).css({
+            height: "100%",
+            top: "-0",
+          });
+        },
+        mouseleave: (e) => {
+          const gamesDiv = $(e.currentTarget);
+          const figure = gamesDiv.children("figure");
+          const gameImg = figure.children(".gameImg");
+          const figcaption = figure.children("figcaption");
+
+$(figure).css({
+  height: "20rem",
+  width: "12rem",
+  borderRadius: "0.8rem",
+  borderWidth: "3px",
+});
+          $(gameImg).css({
+            transform: "scale(1)",
+          });
+          $(figcaption).css({
+            height: "2rem",
+            top: "10rem",
+          });
+        },
+      });
+    };
+    gameFunc();
+  };
   const urlSetFunc = async () => {
     // QUERY LAST "&" REMOVED AND SET TO EMPTY STRING
     pages = `&pages=${page}`;
@@ -75,11 +151,7 @@ $(function () {
     // EMPTY WHOLE GAMES
     $("#gameArticle").empty();
 
-    for (let i = 0; i < data.length; i++) {
-      $("#gameArticle").append(games);
-      $(`.gameImg:eq(${i})`).attr("src", data[i]["src"]);
-      $(`figcaption:eq(${i})`).html(data[i]["names"]);
-    }
+    createGames(data);
     url = "/api/games?";
   };
   $("#more").mouseup(function () {

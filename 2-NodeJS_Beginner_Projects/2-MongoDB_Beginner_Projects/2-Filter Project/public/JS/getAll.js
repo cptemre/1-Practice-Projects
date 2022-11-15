@@ -37,52 +37,68 @@ $(function () {
     // DOM ELEMENTS
 
     // CREATE NAVBAR
-      const colors = [
-        "#FF595E",
-        "#6A4C93",
-        "#A4036F",
-        "#FEEFE5",
-        "#EE6123",
-        "#A6B1E1",
-        "#C1666B",
-        "#E24E1B",
-      ];
-    for (let i = 0; i < titles.length; i++) {
-      const navElement = `<div class="genres pointer transition"></div>`;
-      $("nav").append(navElement);
-      $(`.genres:eq(${i})`).html(titles[i].toUpperCase());
-      $(`.genres:eq(${i})`).attr("id", titles[i]);
-      $(`.genres:eq(${i})`).css("border-color", colors[i]);
-    }
-
-    // CREATE MAIN MENU GAMES
-
-    const createGames = () => {
-      const games = ` <div class="games grid pointer">
-            <figure>
-              <img
-                src=""
-                alt=""
-                class="gameImg"
-              />
-              <figcaption class="transition grid">
-              </figcaption>
-            </figure></div>`;
-      for (let i = 0; i < data.length; i++) {
-        $("#gameArticle").append(games);
-        $(`.gameImg:eq(${i})`).attr("src", data[i]["src"]);
-        $(`figcaption:eq(${i})`).html(data[i]["names"]);
+    const colors = [
+      "#FF595E",
+      "#6A4C93",
+      "#A4036F",
+      "#FEEFE5",
+      "#EE6123",
+      "#A6B1E1",
+      "#C1666B",
+      "#A6A2A2",
+    ];
+    // CREATE NAVBAR MENU AND ASSING MOUSEUP EVENT TO CHANGE COLOR AND BOX COLOR OF INPUTDIV ELEMENTS
+    const navFunc = () => {
+      for (let i = 0; i < titles.length; i++) {
+        const navElement = `<div class="genres pointer transition"></div>`;
+        $("nav").append(navElement);
+        $(`.genres:eq(${i})`).html(titles[i].toUpperCase());
+        $(`.genres:eq(${i})`).attr("id", titles[i]);
+        $(`.genres:eq(${i})`).css("border-color", colors[i]);
+        $(`.genres:eq(${i})`).on({
+          mouseup: (e) => {
+            let placeholderVar = $(e.currentTarget)
+              .html()
+              .slice(0, $(e.currentTarget).html().length - 1)
+              .toLowerCase();
+            $("#label").css("color", colors[i]);
+            $("#search").css("box-shadow", `3px 3px 0px 2px ${colors[i]}`);
+            $("#search").attr(
+              "placeholder",
+              `Write the game ${placeholderVar} here!`
+            );
+          },
+        });
       }
-      // console.log(Object.values(keywords[0].names).length);
     };
-    createGames();
-
+    navFunc();
+    // INPUT FUNCTIONS
+    const inputFunc = () => {
+      $(".search").on({
+        mouseenter: (e) => {
+          let inputColor = $(e.currentTarget).siblings(".label").css("color");
+          $(e.currentTarget).css("box-shadow", `3px 3px 0px 5px ${inputColor}`);
+        },
+        mouseleave: (e) => {
+          let inputColor = $(e.currentTarget).siblings(".label").css("color");
+          $(e.currentTarget).css("box-shadow", `3px 3px 0px 2px ${inputColor}`);
+        },
+        focus: (e) => {
+          let inputColor = $(e.currentTarget).siblings(".label").css("color");
+          $(e.currentTarget).css(
+            "box-shadow",
+            `3px 3px 0px 10px ${inputColor}`
+          );
+        },
+        focusout: (e) => {
+          let inputColor = $(e.currentTarget).siblings(".label").css("color");
+          $(e.currentTarget).css("box-shadow", `3px 3px 0px 2px ${inputColor}`);
+        },
+      });
+    };
+    inputFunc();
     
   };
-  // const query = async () => {
-  //   await axios.get("/api/games?page=1");
-  // };
-  // query();
 
   getAll();
 });
