@@ -2,6 +2,10 @@ $(function () {
   // HTML ELEMENT VARIABLES
   const games = ` <div class="games grid pointer transition">
             <figure class="transition">
+            <div id="borderAnimateTop" class="upDown"></div>
+            <div id="borderAnimateRight" class="leftRight"></div>
+            <div id="borderAnimateBottom" class="upDown"></div>
+            <div id="borderAnimateLeft" class="leftRight"></div>
               <img
                 src=""
                 alt=""
@@ -76,37 +80,32 @@ $(function () {
       $(`figcaption:eq(${i})`).html(data[i]["names"]);
     }
 
-    const gamesMouseFunc = (e) => {
-      const gamesDiv = $(e.currentTarget);
-      const figure = gamesDiv.children("figure");
-      const gameImg = figure.children(".gameImg");
-      const figcaption = figure.children("figcaption");
-      $(gamesDiv).css({
-        width: "20vh",
-      });
-      $(figure).css({
-        width: "100%",
-      });
-      $(gameImg).css({
-        transform: "scale(1.5)",
-      });
-      $(figcaption).css({
-        color: "red",
-      });
-    };
     const gameFunc = () => {
       $(".games").on({
         mouseenter: (e) => {
           const gamesDiv = $(e.currentTarget);
           const figure = gamesDiv.children("figure");
+          const upDown = figure.children(".upDown");
+          const leftRight = figure.children(".leftRight");
           const gameImg = figure.children(".gameImg");
           const figcaption = figure.children("figcaption");
-$(figure).css({
-  height: "25rem",
-  width: "16rem",
-  borderRadius: "1.2rem",
-  borderWidth: "5px"
-});
+          $(upDown).css({
+            width: 0,
+            borderRadius: "1.2rem",
+            borderWidth: "3px",
+            animation: "animationUpDown 1s forwards",
+          });
+          $(leftRight).css({
+            height: 0,
+            borderRadius: "1.2rem",
+            borderWidth: "3px",
+            animation: "animationLeftRight 1s forwards 1s",
+          });
+          $(figure).css({
+            height: "25rem",
+            borderRadius: "1.2rem",
+            borderWidth: "5px",
+          });
           $(gameImg).css({
             transform: "scale(1.3)",
           });
@@ -118,15 +117,27 @@ $(figure).css({
         mouseleave: (e) => {
           const gamesDiv = $(e.currentTarget);
           const figure = gamesDiv.children("figure");
+          const upDown = figure.children(".upDown");
+          const leftRight = figure.children(".leftRight");
           const gameImg = figure.children(".gameImg");
           const figcaption = figure.children("figcaption");
-
-$(figure).css({
-  height: "20rem",
-  width: "12rem",
-  borderRadius: "0.8rem",
-  borderWidth: "3px",
-});
+          $(upDown).css({
+            width: "100%",
+            borderRadius: "0.8rem",
+            borderWidth: "2px",
+            animation: "none",
+          });
+          $(leftRight).css({
+            height: "100%",
+            borderRadius: "0.8rem",
+            borderWidth: "2px",
+            animation: "none",
+          });
+          $(figure).css({
+            height: "20rem",
+            borderRadius: "0.8rem",
+            borderWidth: "3px",
+          });
           $(gameImg).css({
             transform: "scale(1)",
           });
@@ -157,6 +168,8 @@ $(figure).css({
   $("#more").mouseup(function () {
     page++;
     labelQueryFunction();
+    //TEST
+    $(".label:eq(-1)").remove();
     //TEST
     $("html, body").animate(
       {

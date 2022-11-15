@@ -280,6 +280,59 @@ nav {
   flex-basis: auto;
 }
 
+.upDown,
+.leftRight {
+  border: 2px solid rgb(138, 138, 217);
+  border-radius: 0.8rem;
+  position: absolute;
+  z-index: 2;
+}
+
+.upDown {
+  width: 100%;
+
+  /* animation: animationUpDown 1s forwards; */
+}
+
+.leftRight {
+  height: 100%;
+  /* animation: animationLeftRight 1s forwards 1s; */
+}
+#borderAnimateTop {
+  top: 0;
+  left: 0;
+}
+#borderAnimateRight {
+  top: 0;
+  right: 0;
+}
+#borderAnimateBottom {
+  bottom: 0;
+  right: 0;
+}
+#borderAnimateLeft {
+  bottom: 0;
+  left: 0;
+}
+
+@keyframes animationUpDown {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes animationLeftRight {
+  from {
+    height: 0%;
+  }
+  to {
+    height: 100%;
+  }
+}
+
 figure {
   width: 12rem;
   height: 20rem;
@@ -288,7 +341,6 @@ figure {
   position: relative;
   overflow: hidden;
   position: relative;
-  border: 3px solid rgb(138, 138, 217);
 }
 
 img {
