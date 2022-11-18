@@ -2,6 +2,7 @@ const Games = require("../models/model");
 
 const getAll = async (req, res) => {
   const {
+    id,
     names,
     developers,
     publishers,
@@ -12,6 +13,10 @@ const getAll = async (req, res) => {
     modes,
   } = req.query;
   const queries = {};
+
+    if (id) {
+      queries["_id"] = id
+    }
 
   if (names) {
     queries.names = { $regex: names, $options: "gi" };

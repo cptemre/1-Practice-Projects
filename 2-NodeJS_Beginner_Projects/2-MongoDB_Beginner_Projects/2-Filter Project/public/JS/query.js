@@ -18,6 +18,7 @@ $(function () {
                   <input type="search" value="" name="" class="labels" />
                   <span class="delete transition grid pointer">X</span>
                 </div>`;
+  const valueDiv = `<div class="transition grid valueDiv"></div>`;
   // AN OBJECT TO GET QUERIES
   let labelList = [
     { names: "" },
@@ -33,7 +34,6 @@ $(function () {
   let page = 1;
   let pages = "";
   let queryParams = "";
-  let queryParamsBackup = "";
   let url = `/api/games?`;
 
   // NAV FUNCTION - SETS LABEL HTML ACCORDING TO CLICKED NAV OPTION
@@ -78,8 +78,10 @@ $(function () {
       $("#gameArticle").append(games);
       $(`.gameImg:eq(${i})`).attr("src", data[i]["src"]);
       $(`figcaption:eq(${i})`).html(data[i]["names"]);
+      $(`.games:eq(${i})`).attr("id", data[i]["_id"]);
     }
 
+    // GAMES EVENTS
     const gameFunc = () => {
       $(".games").on({
         mouseenter: (e) => {
@@ -89,6 +91,19 @@ $(function () {
           const leftRight = figure.children(".leftRight");
           const gameImg = figure.children(".gameImg");
           const figcaption = figure.children("figcaption");
+          const figcaptionHTML = figure.children("figcaption").html();
+          // FETCH DATA FOR FIGCAPTION
+          const dataFunc = async () => {
+            const { data } = await axios.get(
+              `/api/games?names=${figcaptionHTML}`
+            );
+            // $("#gameArticle").empty();
+            // createGames(data)
+
+            figcaption.html(data[0]["definition"].slice(0, 300) + "...");
+            $(gamesDiv).attr("id", data[0]["_id"]);
+          };
+          dataFunc();
           $(upDown).css({
             width: 0,
             borderRadius: "1.2rem",
@@ -112,6 +127,65 @@ $(function () {
           $(figcaption).css({
             height: "100%",
             top: "-0",
+          });
+          $(".games").on({
+            mouseup: (e) => {
+              const gameID = e.currentTarget.id;
+              // FETCH DATA FOR FIGCAPTION
+              const dataFunc = async () => {
+                let { data } = await axios.get(`/api/games?id=${gameID}`);
+                $("#gameArticle").empty();
+                createGames(data);
+                $(".games").removeClass("pointer");
+                $("#gameArticle").append(
+                  `<div id="infoDiv" class="grid transition"></div>`
+                );
+                console.log(Object.keys(data[0]));
+                for (let i = 0; i < Object.keys(data[0]).length; i++) {
+                  let header2 = Object.keys(data[0])[i];
+                  const normalKeys = ["names", "developers", "publishers", "engines", "platforms", "years", "genres", "modes"]
+                  const linkKeys = ["youtube","wiki","ign","steam","epic","xbox","playstation","nintendo"]
+                  if (normalKeys.includes(header2)) {
+                    let header2Element = `<h2 class="header2 pointer">${header2.toUpperCase()}</h2>`;
+                    $("#infoDiv").append(
+                      `<div class="infoDiv grid transition">${
+                        header2Element + valueDiv
+                      }</div>`
+                    );
+                    $(`.valueDiv:eq(${-1})`).html(
+                      data[0][header2]
+                    );
+                    $(`.infoDiv:eq(${-1})`).attr("id", header2);
+                    console.log(data[0][header2]);
+                  }
+                  if (linkKeys.includes(header2)) {
+                    let header2Element = `<a class="header2 pointer">${header2.toUpperCase()}</a>`;
+                    $("#infoDiv").append(
+                      `<div class="infoDiv grid transition">${
+                        header2Element + valueDiv
+                      }</div>`
+                    );
+                    $(`.header2:eq(-1)`).attr("href", data[0][header2]);
+                    $(`.infoDiv:eq(${-1})`).attr("id", header2);
+                    console.log(data[0][header2]);
+                  }
+                }
+
+                $(".infoDiv").on({
+                  mouseenter: (e) => {
+                    let valueDiv = $(e.currentTarget).children(".valueDiv");
+                    $(valueDiv).css("transform", "scale(1)");
+                    $(valueDiv).css("height", "auto");
+                  },
+                  mouseleave: (e) => {
+                    let valueDiv = $(e.currentTarget).children(".valueDiv");
+                    $(valueDiv).css("transform", "scale(0)");
+                    $(valueDiv).css("height", "0");
+                  },
+                });
+              };
+              dataFunc();
+            },
           });
         },
         mouseleave: (e) => {
@@ -153,7 +227,6 @@ $(function () {
   const urlSetFunc = async () => {
     // QUERY LAST "&" REMOVED AND SET TO EMPTY STRING
     pages = `&pages=${page}`;
-    queryParamsBackup = queryParams;
     queryParams += pages;
     url += queryParams;
     queryParams = "";
@@ -266,7 +339,6 @@ $(function () {
         }
       }
     }
-    queryParamsBackup = queryParams;
     // CALLS LABEL EVENTS
     labelFunc();
     // URL SET FUNCTION
