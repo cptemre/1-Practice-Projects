@@ -19,6 +19,34 @@ $(function () {
                   <span class="delete transition grid pointer">X</span>
                 </div>`;
   const valueDiv = `<div class="transition grid valueDiv"></div>`;
+
+  // INFODIV COLORS FUNCTION
+  const colors = [
+    "#FF595E",
+    "#6A4C93",
+    "#A4036F",
+    "#FEEFE5",
+    "#EE6123",
+    "#A6B1E1",
+    "#C1666B",
+    "#A6A2A2",
+  ];
+  const infoDivFunc = () => {
+    for (let i = 0; i < colors.length; i++) {
+      $(`.header2:eq(${i})`).css("color", colors[i]);
+      $(`.valueDiv:eq(${i})`).css("background-color", colors[i]);
+    }
+  };
+  const normalKeys = [
+    "names",
+    "developers",
+    "publishers",
+    "engines",
+    "platforms",
+    "years",
+    "genres",
+    "modes",
+  ];
   // AN OBJECT TO GET QUERIES
   let labelList = [
     { names: "" },
@@ -100,7 +128,7 @@ $(function () {
             // $("#gameArticle").empty();
             // createGames(data)
 
-            figcaption.html(data[0]["definition"].slice(0, 300) + "...");
+            figcaption.html("CLICK TO SEE MORE");
             $(gamesDiv).attr("id", data[0]["_id"]);
           };
           dataFunc();
@@ -136,39 +164,60 @@ $(function () {
                 let { data } = await axios.get(`/api/games?id=${gameID}`);
                 $("#gameArticle").empty();
                 createGames(data);
+
                 $(".games").removeClass("pointer");
                 $("#gameArticle").append(
                   `<div id="infoDiv" class="grid transition"></div>`
                 );
-                console.log(Object.keys(data[0]));
+                $("figure").css({
+                  width: "100%",
+                });
+                $("figcaption").remove();
                 for (let i = 0; i < Object.keys(data[0]).length; i++) {
                   let header2 = Object.keys(data[0])[i];
-                  const normalKeys = ["names", "developers", "publishers", "engines", "platforms", "years", "genres", "modes"]
-                  const linkKeys = ["youtube","wiki","ign","steam","epic","xbox","playstation","nintendo"]
+                  const linkKeys = [
+                    "youtube",
+                    "wiki",
+                    "ign",
+                    "steam",
+                    "epic",
+                    "xbox",
+                    "playstation",
+                    "nintendo",
+                  ];
                   if (normalKeys.includes(header2)) {
-                    let header2Element = `<h2 class="header2 pointer">${header2.toUpperCase()}</h2>`;
+                    let header2Element = `<h2 class="header2">${header2.toUpperCase()}</h2>`;
                     $("#infoDiv").append(
                       `<div class="infoDiv grid transition">${
                         header2Element + valueDiv
                       }</div>`
                     );
-                    $(`.valueDiv:eq(${-1})`).html(
-                      data[0][header2]
-                    );
+                    $(`.valueDiv:eq(${-1})`).html(data[0][header2]);
                     $(`.infoDiv:eq(${-1})`).attr("id", header2);
                     console.log(data[0][header2]);
                   }
                   if (linkKeys.includes(header2)) {
-                    let header2Element = `<a class="header2 pointer">${header2.toUpperCase()}</a>`;
+                    let header2Element = `<div class="header2 pointer">${header2.toUpperCase()}</div>`;
                     $("#infoDiv").append(
-                      `<div class="infoDiv grid transition">${
+                      `<a target="_blank" class="infoDiv grid transition">${
                         header2Element + valueDiv
-                      }</div>`
+                      }</a>`
                     );
-                    $(`.header2:eq(-1)`).attr("href", data[0][header2]);
+                    $(`.infoDiv:eq(-1)`).attr("href", data[0][header2]);
                     $(`.infoDiv:eq(${-1})`).attr("id", header2);
+                    $(`.valueDiv:eq(${-1})`).html("Click here to check link.");
                     console.log(data[0][header2]);
                   }
+                  // COLOR FUNCTION
+                  infoDivFunc();
+                  $(".mainButton").attr("id", "back");
+                  $("#back").mouseup(function () {
+                    $(".mainButton").attr("id", "more");
+                    if ($(".labels:eq(-1)").html() == "") {
+                      $(".labels:eq(-1)").remove();
+                    }
+                    labelQueryFunction();
+                  });
                 }
 
                 $(".infoDiv").on({
@@ -183,6 +232,17 @@ $(function () {
                     $(valueDiv).css("height", "0");
                   },
                 });
+              };
+              dataFunc();
+            },
+            mouseleave: (e) => {
+              const gamesDiv = $(e.currentTarget);
+              const id = e.currentTarget.id;
+              const figure = gamesDiv.children("figure");
+              const figcaption = figure.children("figcaption");
+              const dataFunc = async () => {
+                const { data } = await axios.get(`/api/games?id=${id}`);
+                figcaption.html(data[0]["names"]);
               };
               dataFunc();
             },
@@ -216,8 +276,8 @@ $(function () {
             transform: "scale(1)",
           });
           $(figcaption).css({
-            height: "2rem",
-            top: "10rem",
+            height: "4.5rem",
+            top: "9rem",
           });
         },
       });
@@ -241,9 +301,9 @@ $(function () {
   $("#more").mouseup(function () {
     page++;
     labelQueryFunction();
-    //TEST
-    $(".label:eq(-1)").remove();
-    //TEST
+    if ($(".labels:eq(-1)").html() == "") {
+      $(".labels:eq(-1)").remove();
+    }
     $("html, body").animate(
       {
         scrollTop: $(document).height(),
@@ -343,6 +403,18 @@ $(function () {
     labelFunc();
     // URL SET FUNCTION
     urlSetFunc();
+    // LABEL COLOR SET
+    for (let i = 0; i < $(`.labels`).length; i++) {
+      let name = $(`.labels:eq(${i})`).attr("name").toUpperCase();
+      for (let y = 0; y < $(`.genres`).length; y++) {
+        if (name == $(`.genres:eq(${y})`).html()) {
+          $(`.labels:eq(${i})`).css(
+            "background-color",
+            $(`.genres:eq(${y})`).css("background-color")
+          );
+        }
+      }
+    }
   };
 
   // LABEL FUNCTIONS TO CONTROL ANIMATIONS AND DELETE FUNCTIONS
@@ -470,6 +542,7 @@ $(function () {
         // RECOMMEND FUNCTIONS
         $(".recommend").unbind("mouseup");
         recommendClickFunc();
+        $(".mainButton").attr("id", "more");
       };
       query();
     },

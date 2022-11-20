@@ -55,6 +55,7 @@ $(function () {
         $(`.genres:eq(${i})`).html(titles[i].toUpperCase());
         $(`.genres:eq(${i})`).attr("id", titles[i]);
         $(`.genres:eq(${i})`).css("border-color", colors[i]);
+        $(`.genres:eq(${i})`).css("background-color", colors[i]);
         $(`.genres:eq(${i})`).on({
           mouseup: (e) => {
             let placeholderVar = $(e.currentTarget)
@@ -97,7 +98,6 @@ $(function () {
       });
     };
     inputFunc();
-    
   };
 
   getAll();

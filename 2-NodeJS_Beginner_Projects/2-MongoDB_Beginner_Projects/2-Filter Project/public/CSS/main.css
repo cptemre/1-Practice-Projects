@@ -3,7 +3,7 @@
   --submitHoverRed: rgb(148, 33, 33);
   --arrowRed: rgb(142, 54, 54);
   --arrowHoverRed: rgb(148, 33, 33);
-  --labelColor: rgb(157, 92, 92);
+  --labelColor: rgb(31, 21, 21);
   --deleteColor: rgb(167, 34, 34);
   --selectColor: rgb(167, 167, 191);
 }
@@ -38,6 +38,10 @@ body {
 
 .hidden {
   height: 0;
+}
+
+a {
+  text-decoration: none;
 }
 
 input {
@@ -121,6 +125,8 @@ input[type="number"] {
 
 .label {
   color: #ff595e;
+  height: 4rem;
+  margin: 0 1rem;
 }
 
 .search {
@@ -171,7 +177,7 @@ input[type="number"] {
 }
 #library {
   font-size: 2rem;
-  color: var(--labelColor);
+  color: rgb(175, 79, 79);
 }
 
 /* LABEL START */
@@ -201,7 +207,7 @@ input[type="number"] {
   border-radius: 1rem;
   border-top-left-radius: 2rem;
   border-bottom-left-radius: 2rem;
-  color: rgb(66, 120, 154);
+  color: rgb(11, 11, 11);
   cursor: pointer;
 }
 
@@ -246,7 +252,7 @@ nav {
   position: relative;
   left: 0;
   padding: 0.2rem 0;
-  z-index: 1;
+  z-index: 10;
 }
 
 .genres:hover {
@@ -258,6 +264,7 @@ nav {
 /* MAIN SECTION START */
 
 #mainSection {
+  margin: 0 auto;
   position: relative;
   transform: translateY(-2.7rem);
 }
@@ -351,39 +358,45 @@ img {
 
 figcaption {
   position: absolute;
-  height: 2.5rem;
+  height: 4.5rem;
   width: 100%;
-  top: 10rem;
+  top: 9rem;
   background-color: rgb(63, 58, 58, 0.8);
   color: rgb(254, 255, 255);
   padding: 0.5rem 2rem;
-  text-align: justify;
 }
 
 #infoDiv {
-  width: 80vw;
-  position: relative;
+  margin: 0 auto;
+  margin-top: 2rem;
+  width: 20rem;
   z-index: 2;
 }
 
-
+.infoDiv {
+  grid-template-rows: 2rem;
+  letter-spacing: 2px;
+  font-size: 16px;
+}
 
 .header2 {
   font-size: 2rem;
-  color: #ff595e;
+  color: #c11a20;
   z-index: 2;
 }
 
 .valueDiv {
   transform-origin: center top;
   transform: scale(0);
-  width: 20rem;
-  background-color: #ff595e;
+  width: 100%;
+  background-color: #c11a20;
   height: 0;
   padding: 1rem 0.5rem;
+  border-radius: 2rem;
+  color: black;
 }
 
-#more {
+.mainButton {
   font-size: 2rem;
   margin: 1rem auto;
   background-color: rgb(74, 74, 190);
@@ -394,7 +407,69 @@ figcaption {
   color: white;
 }
 
+#back {
+  background-color: rgb(192, 76, 76);
+}
+
 #more:hover {
   background-color: rgb(43, 43, 186);
   transform: rotate(360deg);
+}
+#back:hover {
+  background-color: rgb(207, 26, 26);
+  transform: rotate(-360deg);
+}
+
+@media screen and (max-width: 800px) {
+  #gameArticle {
+    width: 10rem;
+  }
+  #searchSection {
+    height: 15rem;
+  }
+  #searchDiv,
+  #yearsDiv {
+    grid-template-columns: 1fr;
+  }
+  #yearsDiv {
+    grid-template-rows: 7rem;
+  }
+  #yearsDiv > .grid {
+    grid-template-rows: 0.5rem;
+  }
+  #submitBtn,
+  #gameLibrary {
+    transform: translateY(2rem);
+  }
+  .header2,
+  .valueDiv {
+    font-size: 10px;
+  }
+}
+@media screen and (max-width: 291px) {
+  #gameArticle,
+  .year,
+  .search,
+  #recommendDiv {
+    width: 5rem;
+  }
+  .header2,
+  .valueDiv,
+  .year,
+  #gameLibrary,
+  .label,
+  #recommendDiv {
+    font-size: 7px;
+  }
+  #gameLibrary {
+    margin: 0 auto;
+    text-align: center;
+  }
+  #yearsDiv {
+    grid-template-rows: 0;
+  }
+  #gameLibrary::first-letter,
+  #library {
+    font-size: 10px;
+  }
 }
