@@ -77,22 +77,42 @@ $(function () {
     const inputFunc = () => {
       $(".search").on({
         mouseenter: (e) => {
-          let inputColor = $(e.currentTarget).siblings(".label").css("color");
+          let inputColor;
+          if ($(e.currentTarget).attr("id") == "size") {
+            inputColor = `rgb(83, 83, 196)`;
+          } else {
+            inputColor = $(e.currentTarget).siblings(".label").css("color");
+          }
           $(e.currentTarget).css("box-shadow", `3px 3px 0px 5px ${inputColor}`);
         },
         mouseleave: (e) => {
-          let inputColor = $(e.currentTarget).siblings(".label").css("color");
+          let inputColor;
+          if ($(e.currentTarget).attr("id") == "size") {
+            inputColor = `rgb(83, 83, 196)`;
+          } else {
+            inputColor = $(e.currentTarget).siblings(".label").css("color");
+          }
           $(e.currentTarget).css("box-shadow", `3px 3px 0px 2px ${inputColor}`);
         },
         focus: (e) => {
-          let inputColor = $(e.currentTarget).siblings(".label").css("color");
+          let inputColor;
+          if ($(e.currentTarget).attr("id") == "size") {
+            inputColor = `rgb(83, 83, 196)`;
+          } else {
+            inputColor = $(e.currentTarget).siblings(".label").css("color");
+          }
           $(e.currentTarget).css(
             "box-shadow",
             `3px 3px 0px 10px ${inputColor}`
           );
         },
         focusout: (e) => {
-          let inputColor = $(e.currentTarget).siblings(".label").css("color");
+          let inputColor;
+          if ($(e.currentTarget).attr("id") == "size") {
+            inputColor = `rgb(83, 83, 196)`;
+          } else {
+            inputColor = $(e.currentTarget).siblings(".label").css("color");
+          }
           $(e.currentTarget).css("box-shadow", `3px 3px 0px 2px ${inputColor}`);
         },
       });

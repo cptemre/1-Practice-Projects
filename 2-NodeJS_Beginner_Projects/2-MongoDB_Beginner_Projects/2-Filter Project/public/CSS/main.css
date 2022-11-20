@@ -96,7 +96,7 @@ input[type="number"] {
 
 #searchSection {
   grid-template-columns: auto;
-  height: auto;
+  max-height: 10rem;
 }
 
 #yearsDiv {
@@ -123,9 +123,15 @@ input[type="number"] {
   background-color: var(--submitHoverRed);
 }
 
+.labelDiv,
+#filterDiv {
+  grid-row-gap: 0;
+  height: 5rem;
+}
+
 .label {
   color: #ff595e;
-  height: 4rem;
+  height: 2rem;
   margin: 0 1rem;
 }
 
@@ -141,9 +147,18 @@ input[type="number"] {
 .year {
   display: none;
 }
+
+#label {
+  transform: translateY(1rem);
+}
 #label1,
 #label2 {
   color: #a6b1e1;
+}
+#label,
+#label1,
+#label2 {
+  grid-template-columns: 1fr;
 }
 #year1,
 #year2 {
@@ -425,28 +440,42 @@ figcaption {
     width: 10rem;
   }
   #searchSection {
-    height: 15rem;
+    max-height: 5rem;
   }
-  #searchDiv,
-  #yearsDiv {
+  #searchDiv {
     grid-template-columns: 1fr;
   }
   #yearsDiv {
     grid-template-rows: 7rem;
+    transform: translateY(-5rem);
   }
   #yearsDiv > .grid {
     grid-template-rows: 0.5rem;
   }
-  #submitBtn,
-  #gameLibrary {
-    transform: translateY(2rem);
+  .year {
+    max-width: 5rem;
+  }
+  #submitBtn {
+    transform: translateY(4rem);
   }
   .header2,
   .valueDiv {
     font-size: 10px;
   }
+  #labelDiv {
+    grid-template-columns: 1fr;
+    transform: translateX(1rem);
+  }
+  .labels {
+    width: 9rem;
+    height: 1rem;
+    font-size: 7px;
+  }
 }
 @media screen and (max-width: 291px) {
+  body {
+    overflow: scroll;
+  }
   #gameArticle,
   .year,
   .search,
@@ -465,8 +494,20 @@ figcaption {
     margin: 0 auto;
     text-align: center;
   }
+  #submitBtn {
+    transform: translateY(2rem);
+    font-size: 5px;
+  }
+  .year,
+  #submitBtn {
+    max-width: 1rem;
+    height: 2rem;
+  }
   #yearsDiv {
-    grid-template-rows: 0;
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
+    transform: translateY(-5rem);
+    grid-column-gap: 0;
   }
   #gameLibrary::first-letter,
   #library {

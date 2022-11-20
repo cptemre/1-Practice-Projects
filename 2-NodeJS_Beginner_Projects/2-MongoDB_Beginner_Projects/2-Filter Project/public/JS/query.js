@@ -89,7 +89,7 @@ $(function () {
           $("#search, #label").css("display", "initial");
           $("#search").attr("name", name);
         }
-        $(".search").val("");
+        $("#search, #year1, #year2").val("");
         $("#recommendDiv").empty();
       });
     },
@@ -289,6 +289,7 @@ $(function () {
     pages = `&pages=${page}`;
     queryParams += pages;
     url += queryParams;
+    console.log(url);
     queryParams = "";
     const { data } = await axios.get(url);
 
@@ -298,19 +299,23 @@ $(function () {
     createGames(data);
     url = "/api/games?";
   };
-  $("#more").mouseup(function () {
-    page++;
-    labelQueryFunction();
-    if ($(".labels:eq(-1)").html() == "") {
-      $(".labels:eq(-1)").remove();
-    }
-    $("html, body").animate(
-      {
-        scrollTop: $(document).height(),
-      },
-      "slow"
-    );
-  });
+
+  const moreSize = () => {
+    $("#more").mouseup(function () {
+      page++;
+      labelQueryFunction();
+      if ($(".labels:eq(-1)").html() == "") {
+        $(".labels:eq(-1)").remove();
+      }
+      $("html, body").animate(
+        {
+          scrollTop: $(document).height(),
+        },
+        "slow"
+      );
+    });
+  };
+  moreSize();
   // SEARCH FUNCTION - GET DATA AND A KEY NAME TO LOOP
   const keyUpFunc = (data, searchName) => {
     let regex = new RegExp($("#search").val(), "gi");
@@ -403,6 +408,7 @@ $(function () {
     labelFunc();
     // URL SET FUNCTION
     urlSetFunc();
+
     // LABEL COLOR SET
     for (let i = 0; i < $(`.labels`).length; i++) {
       let name = $(`.labels:eq(${i})`).attr("name").toUpperCase();
@@ -502,8 +508,9 @@ $(function () {
     labelQueryFunction(e);
     // LABEL FUNCTIONS
     labelFunc();
+
     // EMPTY INPUTS AND RECOMMENDDIV
-    $(".search").val("");
+    $("#search, #year1, #year2").val("");
     $("#recommendDiv").empty();
   };
 
