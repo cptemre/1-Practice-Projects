@@ -1,7 +1,7 @@
 $(function () {
   // INPUT EVENTS
   $("#createInput").on({
-    focus: () => {
+    mousedown: () => {
       $("#mainForm").css("grid-template-columns", "60vw 20vw");
       $("#createBtn").css("transform", "translateX(0) scale(1)");
       $("#createInput").css({
