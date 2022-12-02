@@ -1,4 +1,4 @@
-export const data = [
+export const hobbit = [
   {
     id: 0,
     name: "Bilbo Baggins",

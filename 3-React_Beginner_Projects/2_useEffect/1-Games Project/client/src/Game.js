@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import $ from "jquery";
 import axios from "axios";
-
+import { games } from "./games";
 const Game = () => {
   const [myList, setmyList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -14,6 +14,7 @@ const Game = () => {
       const { data } = await axios.get("/api");
       setmyList(data);
     } catch (error) {
+      setmyList(games);
     } finally {
       setIsLoading(false);
     }

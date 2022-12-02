@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-
+import { hobbit } from "./hobbits";
 const App = () => {
   const [hobbits, setHobbits] = useState([]);
 
@@ -10,10 +10,10 @@ const App = () => {
 
   const fetchData = async () => {
     try {
-      const {data} = await axios.get("/api");
+      const { data } = await axios.get("/api");
       setHobbits(data);
     } catch (error) {
-      console.log(error);
+      setHobbits(hobbit);
     }
   };
 
