@@ -1,0 +1,58 @@
+[
+  {
+    "id": 0,
+    "name": "menemen",
+    "type": "breakfast",
+    "price": 5,
+    "src": "https://img-s2.onedio.com/id-5c313857cf64b1ad10a77c6f/rev-1/raw/s-b708196ee70592df33b9c1a66ec1250234795b9a.jpg"
+  },
+  {
+    "id": 1,
+    "name": "sucuklu yumurta",
+    "type": "breakfast",
+    "price": 6,
+    "src": "https://media-cdn.t24.com.tr/media/library/2019/07/1562395531975-233223233.jpg"
+  },
+  {
+    "id": 2,
+    "name": "serpme",
+    "type": "breakfast",
+    "price": 12,
+    "src": "https://i.pinimg.com/originals/aa/ee/25/aaee258861b6c4bb49d762ed50cedf88.jpg"
+  },
+  {
+    "id": 3,
+    "name": "iskender",
+    "type": "dinner",
+    "price": 15,
+    "src": "https://beefandfish.com/wp-content/uploads/2021/06/iStock-838109144-scaled.jpg"
+  },
+  {
+    "id": 4,
+    "name": "sarma",
+    "type": "dinner",
+    "price": 10,
+    "src": "https://i1.wp.com/loveantalya.com/wp-content/uploads/2017/07/Sarma-1166-.jpg"
+  },
+  {
+    "id": 5,
+    "name": "kuru fasulye",
+    "type": "dinner",
+    "price": 9,
+    "src": "https://foto.haberler.com/haber/2020/09/08/masterchef-yemekleri-en-guzel-kuru-fasulye-13582881_7182_amp.jpg"
+  },
+  {
+    "id": 6,
+    "name": "sütlaç",
+    "type": "desert",
+    "price": 6,
+    "src": "https://www.diyetasistan.com/files/user_uploads/ya%C4%9Fmur3/11s%C3%BCtla%C3%A7.jpg"
+  },
+  {
+    "id": 7,
+    "name": "baklava",
+    "type": "desert",
+    "price": 7,
+    "src": "https://www.tasteofhome.com/wp-content/uploads/2017/10/Cashew-Baklava_exps49967_THCA2180111A08_19_4b_RMS.jpg"
+  }
+]
