@@ -1,0 +1,164 @@
+:root {
+  --personDivWidth: 70vw;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  width: 100vw;
+  min-height: 100vh;
+  overflow: hidden;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: black;
+}
+
+div,
+figure {
+  display: grid;
+  place-items: center;
+}
+
+/* Screen */
+
+#screenDiv {
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+@media screen and (max-width: 380px) {
+  :root {
+    --personDivWidth: 25vh;
+  }
+  .personDivs,
+  .name,
+  .title {
+    font-size: 0.5rem;
+  }
+  #leftBtn {
+    right: 0;
+  }
+  #rightBtn {
+    left: 0;
+  }
+  button {
+    width: 1rem !important;
+    height: 1rem !important;
+    font-size: 0.5rem !important;
+  }
+}
+@media screen and (max-width: 215px) {
+  :root {
+    --personDivWidth: 18vh;
+  }
+}
+
+.buttonDiv {
+  width: 100%;
+  height: 100vh;
+  background-color: black;
+  position: relative;
+  z-index: 2;
+}
+#leftBtnDiv {
+  justify-content: flex-end;
+}
+#rightBtnDiv {
+  justify-content: flex-start;
+}
+
+button {
+  color: black;
+  position: absolute;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 2rem;
+  font-size: 1.2rem;
+  font-weight: bolder;
+  outline: none;
+  border: none;
+  background-color: rgb(190, 134, 134);
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: rgb(171, 46, 46);
+  color: white;
+}
+
+#leftBtn {
+  right: 1rem;
+}
+#rightBtn {
+  left: 1rem;
+}
+
+/* Screen */
+
+#namesContainer {
+  grid-template-columns: repeat(3, 1fr);
+  position: relative;
+}
+
+.personDivs {
+  min-height: 25rem;
+  width: var(--personDivWidth);
+  border: 2px solid brown;
+  border-radius: 2rem;
+  color: brown;
+  margin-top: 12vh;
+  padding: 0.5rem 1rem;
+  transform: translateX(0);
+  z-index: 0;
+}
+
+.personDivs:first-child {
+  position: absolute;
+  right: var(--personDivWidth);
+  z-index: 1;
+}
+
+.personDivs:last-child {
+  position: absolute;
+  left: var(--personDivWidth);
+  z-index: 1;
+}
+
+.nameDiv {
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.name {
+  color: white;
+}
+
+.title {
+  letter-spacing: 2px;
+  color: rgb(125, 125, 202);
+}
+
+p {
+  color: rgb(179, 113, 113);
+  text-align: justify;
+}
+
+figure {
+  max-width: 6rem;
+  width: 100%;
+}
+
+img {
+  width: 100%;
+  height: 5rem;
+  object-fit: cover;
+  border: 2px solid white;
+  border-radius: 2rem;
+}
