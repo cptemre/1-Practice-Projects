@@ -1,0 +1,52 @@
+export const loremData = [
+  {
+    id: 0,
+    lorem:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias iusto ipsa libero, eum nisi porro ducimus repellendus consequuntur autem impedit architecto voluptatum provident, dicta quasi quae. Vero fugit soluta deserunt assumenda libero, blanditiis, ducimus, cupiditate nihil optio saepe cumque autem!",
+  },
+  {
+    id: 1,
+    lorem:
+      "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Recusandae, tempore esse maxime delectus tempora a? Eaque aperiam adipisci doloremque qui deleniti rerum omnis id sit?",
+  },
+  {
+    id: 2,
+    lorem:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis cum, quo, sapiente dicta, nesciunt ipsam molestias modi provident eos facilis similique nemo quibusdam illo vitae fugit consectetur consequuntur! Quo alias dignissimos dolores veritatis saepe unde accusamus.",
+  },
+  {
+    id: 3,
+    lorem:
+      "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Officiis et vel sapiente magnam, iste nemo numquam in animi quisquam vitae beatae explicabo architecto est voluptas maxime, ducimus mollitia, eius ullam voluptate deserunt veritatis totam tempore perspiciatis. Perspiciatis quasi porro sapiente alias similique doloribus esse exercitationem culpa aliquid totam maiores architecto, obcaecati ut dolorum nesciunt tempore.",
+  },
+  {
+    id: 4,
+    lorem:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo quaerat magni nostrum veniam minima voluptates sapiente molestias. Dolorum fugiat suscipit non ab minima voluptas blanditiis excepturi facere necessitatibus. Quibusdam voluptates eum quas ut consequuntur odit blanditiis tenetur totam dignissimos dolorem illum aliquam nemo, dolor numquam perspiciatis incidunt quos.",
+  },
+  {
+    id: 5,
+    lorem:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi optio, animi enim impedit odio maiores nam. Excepturi laboriosam aliquid, dolorum obcaecati modi in quibusdam explicabo sapiente eum tenetur qui at? Sapiente, nesciunt rem dolore quae sunt excepturi vero fugiat id nostrum reprehenderit.",
+  },
+  {
+    id: 6,
+    lorem:
+      "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Provident laudantium, optio vitae doloremque facilis, qui impedit tempore, in cumque id velit aperiam ipsa incidunt numquam natus hic.",
+  },
+  {
+    id: 7,
+    lorem:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam velit perspiciatis culpa id cum a.",
+  },
+  {
+    id: 8,
+    lorem:
+      "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Alias molestias delectus ratione, sed fugit dolorum, recusandae temporibus excepturi numquam ullam enim quod. Rem, provident molestiae, architecto odio ducimus quam fuga dolor odit quaerat quibusdam cum impedit placeat! Ab unde, aspernatur aut numquam, qui sed, quam eos provident cupiditate dolor molestiae praesentium voluptatum commodi officia. Odit aliquid nostrum rerum quae sit, tempora ipsa nisi!",
+  },
+  {
+    id: 9,
+    lorem:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum explicabo enim tempore unde eligendi dignissimos temporibus, architecto magnam iusto pariatur sed odit deleniti animi.",
+  },
+];
